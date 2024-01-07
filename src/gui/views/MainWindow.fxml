@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainWindowController">
    <children>
       <HBox prefHeight="72.0" prefWidth="800.0">
          <children>
@@ -87,7 +87,7 @@
                      <children>
                         <HBox prefHeight="57.0" prefWidth="369.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add Movie to Library">
+                              <Button fx:id="newMovieBtn" mnemonicParsing="false" onAction="#clickNewMovieBtn" text="Add Movie to Library">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
