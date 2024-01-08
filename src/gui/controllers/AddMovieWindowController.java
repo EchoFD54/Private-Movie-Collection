@@ -34,16 +34,16 @@ public class AddMovieWindowController {
     }
 
     public void clickAddMovie(ActionEvent actionEvent) {
-        // Retrieve the song properties from the text fields
+        // Retrieve the movie properties from the text fields
         String title = titleField.getText();
         String imdbRating = imdbRatingField.getText();
         String personalRating = personalRatingField.getText();
         String filePath = fileField.getText();
 
-        // Update the song properties in the MainWindowController
+        // Update the movie properties in the MainWindowController
         mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
 
-        // Close the AddSongWindow
+        // Close the AddMovieWindow
         ((Stage) titleField.getScene().getWindow()).close();
     }
 }
