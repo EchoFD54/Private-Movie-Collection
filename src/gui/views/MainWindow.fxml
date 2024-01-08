@@ -73,7 +73,7 @@
                <children>
                   <HBox prefHeight="197.0" prefWidth="581.0">
                      <children>
-                        <TableView prefHeight="186.0" prefWidth="598.0">
+                        <TableView fx:id="movieTableView" prefHeight="186.0" prefWidth="598.0">
                           <columns>
                             <TableColumn prefWidth="150.0" text="Name" />
                             <TableColumn prefWidth="150.0" text="IMDB Rating" />
