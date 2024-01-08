@@ -11,6 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class MainWindowController {
@@ -58,10 +60,11 @@ public class MainWindowController {
     public void setButtons(){
         // Set a listener for handling movie selection
         movieTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            int selectedSongIndex = movieTableView.getSelectionModel().getSelectedIndex();
-            if (selectedSongIndex >= 0) {
-                movieIndex = selectedSongIndex;
+            int selectedMovieIndex = movieTableView.getSelectionModel().getSelectedIndex();
+            if (selectedMovieIndex >= 0) {
+                movieIndex = selectedMovieIndex;
                 System.out.println("Play Movie Now");
+                playSelectedMovie(newValue);
             }
         });
 
@@ -70,7 +73,25 @@ public class MainWindowController {
     }
 
     public void updateMovieProperties(String title, String imdbRating, String personalRating, String filePath){
-        Movie newMovie = new Movie(title, imdbRating, personalRating);
+        Movie newMovie = new Movie(title, imdbRating, personalRating, filePath);
         movieTableView.getItems().add(newMovie);
+    }
+
+    private void playSelectedMovie(Movie selectedMovie){
+    String filePath = String.valueOf(selectedMovie.getFilePath());
+        File movieFile = new File(filePath);
+
+        if (Desktop.isDesktopSupported() && movieFile.exists()) {
+            try {
+                Desktop.getDesktop().open(movieFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception (will apply this after)
+            }
+        } else {
+            System.out.println(filePath);
+            System.out.println("Cannot play the selected movie. File does not exist or Desktop is not supported.");
+            // Handle the case where the file doesn't exist or Desktop is not supported
+        }
     }
 }
