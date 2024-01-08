@@ -15,5 +15,6 @@
       <Button fx:id="browseFileBtn" layoutX="125.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickBrowse" text="Browse" />
       <Button fx:id="addMovieBtn" layoutX="254.0" layoutY="324.0" mnemonicParsing="false" onAction="#clickAddMovie" text="Add Movie" />
       <TextField fx:id="imdbRatingField" layoutX="207.0" layoutY="142.0" />
+      <Label layoutX="109.0" layoutY="147.0" text="IMDB Rating" />
    </children>
 </AnchorPane>
