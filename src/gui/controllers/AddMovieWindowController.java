@@ -10,12 +10,8 @@ import java.io.File;
 
 public class AddMovieWindowController {
 
-    public TextField fileField;
-    public TextField titleField;
-    public TextField personalRatingField;
-    public Button browseFileBtn;
-    public Button addMovieBtn;
-    public TextField imdbRatingField;
+    public TextField fileField, titleField, personalRatingField, imdbRatingField;
+    public Button browseFileBtn, addMovieBtn;
     private MainWindowController mainWindowController;
 
     public void setMainWindowController(MainWindowController mainWindowController) {
