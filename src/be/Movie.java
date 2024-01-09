@@ -54,5 +54,31 @@ public class Movie {
         return movieId;
     }
 
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
 
+    public void setImdbRating(String imdbRating) {
+        this.imdbRating.set(imdbRating);
+    }
+
+    public void setPersonalRating(String personalRating) {
+        this.personalRating.set(personalRating);
+    }
+
+    public void setLastWatched(String lastWatched) {
+        this.lastWatched.set(lastWatched);
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath.set(filePath);
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId.set(movieId);
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
