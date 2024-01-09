@@ -58,7 +58,7 @@
          <children>
             <VBox prefHeight="454.0" prefWidth="202.0">
                <children>
-                  <TableView prefHeight="459.0" prefWidth="220.0">
+                  <TableView fx:id="categoryTableView" onMouseClicked="#moviesInCategory" prefHeight="459.0" prefWidth="220.0">
                     <columns>
                       <TableColumn prefWidth="100.0" text="Name" />
                       <TableColumn prefWidth="100.0" text="Nº of Movies" />
@@ -129,7 +129,7 @@
                   </HBox>
                   <HBox prefHeight="211.0" prefWidth="580.0">
                      <children>
-                        <TableView prefHeight="200.0" prefWidth="597.0">
+                        <TableView fx:id="movieInCatTableView" prefHeight="200.0" prefWidth="597.0">
                           <columns>
                             <TableColumn prefWidth="150.0" text="Name" />
                             <TableColumn prefWidth="150.0" text="IMDB Rating" />
