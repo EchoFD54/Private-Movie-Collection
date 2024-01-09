@@ -13,13 +13,13 @@ public class MovieDAO implements IMovieDAO{
     public void createMovie(Movie m) {
         try(Connection con = cm.getConnection())
         {
-            String sql = "INSERT INTO Movies(Name, IMDBRating, PersonalRating, FilePath, LastView) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO Movies(Name, IMDBRating, PersonalRating, FilePath) VALUES (?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, m.getTitle().get());
             pstmt.setString(2, m.getImdbRating().get());
             pstmt.setString(3, m.getPersonalRating().get());
             pstmt.setString(4, m.getFilePath().get());
-            pstmt.setString(5, m.getLastWatched().get());
+            //pstmt.setString(5, m.getLastWatched().get());
             pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
