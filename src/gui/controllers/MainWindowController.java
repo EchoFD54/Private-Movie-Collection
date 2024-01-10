@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class MainWindowController {
 
@@ -201,11 +202,10 @@ public class MainWindowController {
                     // User clicked OK, delete the movie
                     int selectedIndex = movieTableView.getSelectionModel().getSelectedIndex();
 
-                    // Remove the movie from the Database, TableView and categories
+                    // Remove the movie from the Database, TableView and Categories
                     movieManager.deleteMovie(selectedMovie.getMovieId().getValue());
                     movieTableView.getItems().remove(selectedIndex);
-                    //add categories code
-
+                    refreshCategoryTableView();
                 }
             });
         } else {
@@ -219,5 +219,10 @@ public class MainWindowController {
 
     }
 
+    public void refreshCategoryTableView() {
+        categoryTableView.getItems().clear();
+        List<Category> allCategories = categoryManager.getAllCategories();
+        categoryTableView.getItems().addAll(allCategories);
+    }
 
 }
