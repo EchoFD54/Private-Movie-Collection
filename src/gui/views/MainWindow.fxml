@@ -107,7 +107,7 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="265.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add Movie to Category">
+                              <Button mnemonicParsing="false" onAction="#addSelectedMovieToCategory" text="Add Movie to Category">
                                  <HBox.margin>
                                     <Insets right="2.0" top="5.0" />
                                  </HBox.margin>
