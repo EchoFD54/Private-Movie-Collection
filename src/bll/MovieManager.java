@@ -12,8 +12,9 @@ public class MovieManager {
     /**
      * Creates a Movie on the Database
      */
-    public void createMovie(Movie m) {
+    public int createMovie(Movie m) {
         movieDAO.createMovie(m);
+        return m;
     }
 
     /**

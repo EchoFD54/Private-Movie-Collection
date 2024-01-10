@@ -9,7 +9,7 @@ public interface IMovieDAO {
     /**
      * Creates a Movie on the Database
      */
-    void createMovie(Movie m);
+    int createMovie(Movie m);
 
     /**
      * Updates a Movie on the Database
