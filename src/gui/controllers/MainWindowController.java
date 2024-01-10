@@ -234,7 +234,13 @@ public class MainWindowController {
         categoryTableView.getItems().addAll(allCategories);
     }
 
-    public void editCategory(String selectedCategoryName, Category newCategoryName){
+    private void createCategory (Category categoryName) {
+        ObservableList<Category> categories = categoryTableView.getItems();
+        categories.add(categoryName);  // Add the new playlist name to the list
+        categoryTableView.setItems(categories);  // Update the playlist view
+    }
+
+    private void editCategory(String selectedCategoryName, Category newCategoryName){
         newCategoryName.setName(selectedCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
         int index = categories.indexOf(selectedCategoryName);
@@ -242,12 +248,30 @@ public class MainWindowController {
             categories.set(index, newCategoryName);  // Update the name of the category
             categoryTableView.setItems(categories);  // Update the category table view
         }
+    }
+
+    private void deleteCategory(){
+        categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
     }
 
-    public void deleteCategory(){
-        categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
+    private void addSelectedMovieToCategory(){
+        Integer categoryId = categoryTableView.getSelectionModel().getSelectedItem().getId().get();
+        Integer movieId = movieTableView.getSelectionModel().getSelectedItem().getMovieId().get();
+        if (categoryId != null && movieId != null) {
+            categoryManager.placeMovieOnCategory(categoryId, movieId);
+        }
         refreshCategoryTableView();
+    }
+
+    private void deleteMovieInCategory(ActionEvent actionEvent){
+        Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null){
+            Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
+            categoryManager.deleteMovieOnPlaylist(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
+            movieInCatTableView.getItems().remove(selectedMovie);
+            refreshCategoryTableView();
+        }
     }
 
     public void toggleFilterBtn(ActionEvent actionEvent) {
