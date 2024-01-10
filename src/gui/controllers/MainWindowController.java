@@ -99,7 +99,6 @@ public class MainWindowController {
             int selectedMovieIndex = movieTableView.getSelectionModel().getSelectedIndex();
             if (selectedMovieIndex >= 0) {
                 movieIndex = selectedMovieIndex;
-                System.out.println("Play Movie Now");
                 playSelectedMovie(newValue);
             }
         });
