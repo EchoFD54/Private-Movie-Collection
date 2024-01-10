@@ -5,6 +5,7 @@ import be.Movie;
 import bll.CategoryManager;
 import bll.MovieManager;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -23,18 +25,20 @@ import java.util.List;
 
 public class MainWindowController {
 
+    public TextField filterTextField;
     @FXML
     private TableView<Category> categoryTableView;
     @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
-    private Button newMovieBtn, deleteBtn;
+    private Button newMovieBtn, deleteBtn, filterBtn;
     @FXML
     private int movieIndex;
     @FXML
     private MovieManager movieManager = new MovieManager();
     @FXML
     private CategoryManager categoryManager = new CategoryManager();
+    private Boolean isFilterActive = false;
 
     @FXML
     private void initialize(){
@@ -106,6 +110,13 @@ public class MainWindowController {
 
         // Set the event handler for the addMovies button
         newMovieBtn.setOnAction(this::clickNewMovieBtn);
+
+        //event handler for the filter function
+        filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                clearFilter();
+            }
+        });
     }
 
     private void dataBaseSetUp(){
@@ -237,6 +248,36 @@ public class MainWindowController {
     public void deleteCategory(){
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
+    }
+
+    public void toggleFilterBtn(ActionEvent actionEvent) {
+        if (isFilterActive) {
+            clearFilter();
+        } else {
+            applyFilter();
+        }
+    }
+
+    private void applyFilter() {
+        String filterQuery = filterTextField.getText().toLowerCase();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+
+        for (Movie song : movieManager.getAllMovies()) {
+            if (song.getTitle().get().toLowerCase().contains(filterQuery))  { //|| song.artistProperty().get().toLowerCase().contains(filterQuery))
+                filteredMovies.add(song);
+            }
+        }
+
+        movieTableView.setItems(filteredMovies);
+        filterBtn.setText("Clear");
+        isFilterActive = true;
+    }
+
+    private void clearFilter() {
+        movieTableView.setItems(FXCollections.observableArrayList(movieManager.getAllMovies()));
+        filterTextField.clear();
+        filterBtn.setText("Filter");
+        isFilterActive = false;
     }
 
 }
