@@ -100,7 +100,6 @@ public class MainWindowController {
             int selectedMovieIndex = movieTableView.getSelectionModel().getSelectedIndex();
             if (selectedMovieIndex >= 0) {
                 movieIndex = selectedMovieIndex;
-                System.out.println("Play Movie Now");
                 playSelectedMovie(newValue);
             }
         });
@@ -172,7 +171,7 @@ public class MainWindowController {
     }
 
     private void playSelectedMovie(Movie selectedMovie){
-    String filePath = String.valueOf(selectedMovie.getFilePath());
+        String filePath = selectedMovie.getFilePath().get();
         File movieFile = new File(filePath);
 
         if (Desktop.isDesktopSupported() && movieFile.exists()) {
@@ -180,12 +179,10 @@ public class MainWindowController {
                 Desktop.getDesktop().open(movieFile);
             } catch (IOException e) {
                 e.printStackTrace();
-                // Handle the exception (will apply this after)
             }
         } else {
             System.out.println(filePath);
             System.out.println("Cannot play the selected movie. File does not exist or Desktop is not supported.");
-            // Handle the case where the file doesn't exist or Desktop is not supported
         }
     }
 
