@@ -10,7 +10,7 @@ public class MovieDAO implements IMovieDAO{
     private final ConnectionManager cm = new ConnectionManager();
 
     @Override
-    public Movie createMovie(Movie m) {
+    public int createMovie(Movie m) {
         try(Connection con = cm.getConnection())
         {
             String sql = "INSERT INTO Movies(Name, IMDBRating, PersonalRating, FilePath) VALUES (?,?,?,?)";
@@ -22,10 +22,12 @@ public class MovieDAO implements IMovieDAO{
             //pstmt.setString(5, m.getLastWatched().get());
             pstmt.execute();
 
+            //int affectedRows = pstmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
             try (ResultSet keys = pstmt.getGeneratedKeys()) {
                 keys.next();
-                keys.getLong(1);
-                return m;
+                int id = (int) keys.getLong(1);
+                return id;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

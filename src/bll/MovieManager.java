@@ -14,7 +14,7 @@ public class MovieManager {
      */
     public int createMovie(Movie m) {
         movieDAO.createMovie(m);
-        return m;
+        return m.getMovieId().get();
     }
 
     /**
