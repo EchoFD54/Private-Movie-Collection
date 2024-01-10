@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainWindowController {
-
+    @FXML
     public TextField filterTextField;
     @FXML
     private TableView<Category> categoryTableView;
