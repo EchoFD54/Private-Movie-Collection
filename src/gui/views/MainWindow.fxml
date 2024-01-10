@@ -75,10 +75,11 @@
                      <children>
                         <TableView fx:id="movieTableView" prefHeight="186.0" prefWidth="598.0">
                           <columns>
-                            <TableColumn prefWidth="150.0" text="Name" />
-                            <TableColumn prefWidth="150.0" text="IMDB Rating" />
-                              <TableColumn prefWidth="150.0" text="Personal Rating" />
-                              <TableColumn prefWidth="150.0" text="Last Viewed" />
+                            <TableColumn prefWidth="165.0" text="Name" />
+                            <TableColumn prefWidth="78.0" text="IMDB Rating" />
+                              <TableColumn prefWidth="96.0" text="Personal Rating" />
+                              <TableColumn prefWidth="149.0" text="Categories" />
+                              <TableColumn prefWidth="107.0" text="Last Viewed" />
                           </columns>
                         </TableView>
                      </children>
