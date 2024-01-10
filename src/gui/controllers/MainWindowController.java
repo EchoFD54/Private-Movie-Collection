@@ -10,9 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -21,12 +20,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainWindowController {
+
     @FXML
     private TableView<Category> categoryTableView;
     @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
-    private Button newMovieBtn;
+    private Button newMovieBtn, deleteBtn;
     @FXML
     private int movieIndex;
     @FXML
@@ -186,4 +186,38 @@ public class MainWindowController {
             // Handle the case where the file doesn't exist or Desktop is not supported
         }
     }
+
+    public void clickDelBtn(ActionEvent actionEvent) {
+        Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete the selected movie?");
+            alert.setContentText("This action cannot be undone.");
+
+            // Handle the users response
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    // User clicked OK, delete the movie
+                    int selectedIndex = movieTableView.getSelectionModel().getSelectedIndex();
+
+                    // Remove the movie from the Database, TableView and categories
+                    movieManager.deleteMovie(selectedMovie.getMovieId().getValue());
+                    movieTableView.getItems().remove(selectedIndex);
+                    //add categories code
+
+                }
+            });
+        } else {
+            // Show a message saying that no movie is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Movie Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a movie to delete.");
+            alert.showAndWait();
+        }
+
+    }
+
+
 }
