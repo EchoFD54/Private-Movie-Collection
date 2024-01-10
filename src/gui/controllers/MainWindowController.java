@@ -54,7 +54,8 @@ public class MainWindowController {
         TableColumn<Movie, String> titleColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(0);
         TableColumn<Movie, String> imdbRatingColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(1);
         TableColumn<Movie, String> personalRatingColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(2);
-        TableColumn<Movie, String> lastWatchedColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(3);
+        TableColumn<Movie, String> categories = (TableColumn<Movie, String>) movieTableView.getColumns().get(3);
+        TableColumn<Movie, String> lastWatchedColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(4);
 
         // Define cell value factories for each column
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
@@ -176,7 +177,9 @@ public class MainWindowController {
         if (!movieExists) {
             Movie newMovie = new Movie(title, imdbRating, personalRating, filePath);
             // Adds a new movie in the database
-            movieManager.createMovie(newMovie);
+            int idMovie = movieManager.createMovie(newMovie);
+            newMovie.setMovieId(idMovie);
+            System.out.println(newMovie.getMovieId().get());
             movieTableView.getItems().add(newMovie);
         }
     }
