@@ -5,6 +5,7 @@ import be.Movie;
 import bll.CategoryManager;
 import bll.MovieManager;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -223,6 +224,22 @@ public class MainWindowController {
         categoryTableView.getItems().clear();
         List<Category> allCategories = categoryManager.getAllCategories();
         categoryTableView.getItems().addAll(allCategories);
+    }
+
+    public void editCategory(String selectedCategoryName, Category newCategoryName){
+        newCategoryName.setName(selectedCategoryName);
+        ObservableList<Category> categories = categoryTableView.getItems();
+        int index = categories.indexOf(selectedCategoryName);
+        if (index != -1){
+            categories.set(index, newCategoryName);  // Update the name of the category
+            categoryTableView.setItems(categories);  // Update the category table view
+        }
+        refreshCategoryTableView();
+    }
+
+    public void deleteCategory(){
+        categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
+        refreshCategoryTableView();
     }
 
 }
