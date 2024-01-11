@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ public class MainWindowController {
     @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
-    private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn;
+    private Button newMovieBtn, deleteBtn, filterBtn;
     @FXML
     private int movieIndex;
     @FXML
@@ -54,8 +55,7 @@ public class MainWindowController {
         TableColumn<Movie, String> titleColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(0);
         TableColumn<Movie, String> imdbRatingColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(1);
         TableColumn<Movie, String> personalRatingColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(2);
-        TableColumn<Movie, String> categories = (TableColumn<Movie, String>) movieTableView.getColumns().get(3);
-        TableColumn<Movie, String> lastWatchedColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(4);
+        TableColumn<Movie, String> lastWatchedColumn = (TableColumn<Movie, String>) movieTableView.getColumns().get(3);
 
         // Define cell value factories for each column
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
@@ -145,7 +145,7 @@ public class MainWindowController {
             AddMovieWindowController addMovieController = loader.getController();
             addMovieController.setMainWindowController(this);
             Stage stage = new Stage();
-            stage.setTitle("Add/Rate Movie");
+            stage.setTitle("Add Movie");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -176,9 +176,7 @@ public class MainWindowController {
         if (!movieExists) {
             Movie newMovie = new Movie(title, imdbRating, personalRating, filePath);
             // Adds a new movie in the database
-            int idMovie = movieManager.createMovie(newMovie);
-            newMovie.setMovieId(idMovie);
-            System.out.println(newMovie.getMovieId().get());
+            movieManager.createMovie(newMovie);
             movieTableView.getItems().add(newMovie);
         }
     }
@@ -242,7 +240,7 @@ public class MainWindowController {
         categoryTableView.setItems(categories);  // Update the category view
     }
 
-    private void editCategory(String selectedCategoryName, Category newCategoryName) {
+    protected void editCategory(String selectedCategoryName, Category newCategoryName) {
         newCategoryName.setName(selectedCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
         int index = categories.indexOf(selectedCategoryName);
@@ -256,7 +254,8 @@ public class MainWindowController {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
     }
-@FXML
+
+    @FXML
     private void addSelectedMovieToCategory() {
         Integer categoryId = categoryTableView.getSelectionModel().getSelectedItem().getId().get();
         Integer movieId = movieTableView.getSelectionModel().getSelectedItem().getMovieId().get();
@@ -266,6 +265,7 @@ public class MainWindowController {
         refreshCategoryTableView();
     }
 
+    @FXML
     private void deleteMovieInCategory(ActionEvent actionEvent) {
         Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
@@ -322,45 +322,25 @@ public class MainWindowController {
         }
     }
 
-    public void clickEditMovie(ActionEvent actionEvent) {
-        Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+    @FXML
+    private void editCategory() {
+        Category selectedCategoryName = categoryTableView.getSelectionModel().getSelectedItems().get(0);  // Retrieve the selected category name
 
-        if (selectedMovie != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/AddMovieWindow.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/EditCategory.fxml"));
+            Parent root = loader.load();
 
-                AddMovieWindowController addMovieController = loader.getController();
+            EditCategoryController editCategoryController = loader.getController();
+            editCategoryController.setMainWindowController(this);
+            editCategoryController.setSelectedCategoryName(selectedCategoryName); // Pass the selected category name
 
-                addMovieController.setMainWindowController(this);
-
-                // Set the fields in AddMovieWindowController with the selected movie properties
-                addMovieController.titleField.setText(selectedMovie.getTitle().get());
-                addMovieController.imdbRatingField.setText(selectedMovie.getImdbRating().get());
-                addMovieController.personalRatingField.setText(selectedMovie.getPersonalRating().get());
-                addMovieController.fileField.setText(selectedMovie.getFilePath().get());
-
-                // Create a new stage for the AddMovieWindow
-                Stage stage = new Stage();
-                stage.setTitle("Edit Movie");
-                stage.setScene(new Scene(root));
-
-                addMovieController.setStage(stage);
-
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // Show an alert or message indicating that no Movie is selected
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Movie Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a Movie to edit.");
-            alert.showAndWait();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Category");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
-
 }
