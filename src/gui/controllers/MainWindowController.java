@@ -256,7 +256,7 @@ public class MainWindowController {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
     }
-
+@FXML
     private void addSelectedMovieToCategory() {
         Integer categoryId = categoryTableView.getSelectionModel().getSelectedItem().getId().get();
         Integer movieId = movieTableView.getSelectionModel().getSelectedItem().getMovieId().get();
