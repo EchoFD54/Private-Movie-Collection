@@ -145,7 +145,7 @@ public class MainWindowController {
             AddMovieWindowController addMovieController = loader.getController();
             addMovieController.setMainWindowController(this);
             Stage stage = new Stage();
-            stage.setTitle("Add Movie");
+            stage.setTitle("Add/Rate Movie");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -343,7 +343,7 @@ public class MainWindowController {
 
                 // Create a new stage for the AddMovieWindow
                 Stage stage = new Stage();
-                stage.setTitle("Edit Song");
+                stage.setTitle("Edit Movie");
                 stage.setScene(new Scene(root));
 
                 addMovieController.setStage(stage);
