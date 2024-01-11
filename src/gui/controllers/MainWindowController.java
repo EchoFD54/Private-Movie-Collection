@@ -31,7 +31,7 @@ public class MainWindowController {
     @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
-    private Button newMovieBtn, deleteBtn, filterBtn;
+    private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn;
     @FXML
     private int movieIndex;
     @FXML
@@ -321,4 +321,46 @@ public class MainWindowController {
             e.printStackTrace();
         }
     }
+
+    public void clickEditMovie(ActionEvent actionEvent) {
+        Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedMovie != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/AddMovieWindow.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+
+                AddMovieWindowController addMovieController = loader.getController();
+
+                addMovieController.setMainWindowController(this);
+
+                // Set the fields in AddMovieWindowController with the selected movie properties
+                addMovieController.titleField.setText(selectedMovie.getTitle().get());
+                addMovieController.imdbRatingField.setText(selectedMovie.getImdbRating().get());
+                addMovieController.personalRatingField.setText(selectedMovie.getPersonalRating().get());
+                addMovieController.fileField.setText(selectedMovie.getFilePath().get());
+
+                // Create a new stage for the AddMovieWindow
+                Stage stage = new Stage();
+                stage.setTitle("Edit Song");
+                stage.setScene(new Scene(root));
+
+                addMovieController.setStage(stage);
+
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Show an alert or message indicating that no Movie is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Movie Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a Movie to edit.");
+            alert.showAndWait();
+        }
+    }
+
+
 }
