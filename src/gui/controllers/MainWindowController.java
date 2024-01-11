@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -239,7 +240,7 @@ public class MainWindowController {
         categoryTableView.setItems(categories);  // Update the category view
     }
 
-    private void editCategory(String selectedCategoryName, Category newCategoryName) {
+    protected void editCategory(String selectedCategoryName, Category newCategoryName) {
         newCategoryName.setName(selectedCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
         int index = categories.indexOf(selectedCategoryName);
@@ -253,7 +254,8 @@ public class MainWindowController {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
     }
-@FXML
+
+    @FXML
     private void addSelectedMovieToCategory() {
         Integer categoryId = categoryTableView.getSelectionModel().getSelectedItem().getId().get();
         Integer movieId = movieTableView.getSelectionModel().getSelectedItem().getMovieId().get();
@@ -263,6 +265,7 @@ public class MainWindowController {
         refreshCategoryTableView();
     }
 
+    @FXML
     private void deleteMovieInCategory(ActionEvent actionEvent) {
         Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
@@ -312,6 +315,28 @@ public class MainWindowController {
             newCategoryController.setMainWindowController(this);
             Stage stage = new Stage();
             stage.setTitle("Add Category");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void editCategory() {
+        Category selectedCategoryName = categoryTableView.getSelectionModel().getSelectedItems().get(0);  // Retrieve the selected category name
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/EditCategory.fxml"));
+            Parent root = loader.load();
+
+            EditCategoryController editCategoryController = loader.getController();
+            editCategoryController.setMainWindowController(this);
+            editCategoryController.setSelectedCategoryName(selectedCategoryName); // Pass the selected category name
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Category");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
