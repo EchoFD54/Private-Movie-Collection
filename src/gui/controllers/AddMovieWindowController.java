@@ -54,7 +54,7 @@ public class AddMovieWindowController {
         }
 
         String filePath = fileField.getText();
-        if (isRatingANumber==true && areNumbersInRange==true) {
+        if (isRatingANumber && areNumbersInRange||personalRating.isEmpty()) {
 
             // Update the movie properties in the MainWindowController
             mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
