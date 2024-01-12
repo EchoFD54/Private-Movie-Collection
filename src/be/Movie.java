@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.lang.ref.Reference;
+
 public class Movie {
     private StringProperty title;
     private StringProperty imdbRating;
@@ -80,5 +82,9 @@ public class Movie {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Reference<Object> songIdProperty() {
+        return null;
     }
 }
