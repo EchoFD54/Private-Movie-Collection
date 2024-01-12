@@ -17,7 +17,7 @@ public class AddMovieWindowController {
     private Stage stage;
     private boolean isRatingANumber=true;
     private boolean areNumbersInRange;
-
+    private boolean userWantsToRate=false;
     public void setMainWindowController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
     }
@@ -39,22 +39,23 @@ public class AddMovieWindowController {
         String imdbRating = imdbRatingField.getText();
 
         String personalRating = personalRatingField.getText();
-        try {
-            float truePRating = Float.parseFloat(personalRating);
-            isRatingANumber=true;
+        if(userWantsToRate==true) {
+            try {
+                float truePRating = Float.parseFloat(personalRating);
+                isRatingANumber = true;
 
-            if (truePRating>=0 && truePRating<=10){
-                areNumbersInRange=true;
-            } else {
-                areNumbersInRange = false;
+                if (truePRating >= 0 && truePRating <= 10) {
+                    areNumbersInRange = true;
+                } else {
+                    areNumbersInRange = false;
+                }
+            } catch (NumberFormatException ex) {
+                isRatingANumber = false;
             }
         }
-        catch (NumberFormatException ex){
-            isRatingANumber=false;
-        }
-
         String filePath = fileField.getText();
-        if (isRatingANumber==true && areNumbersInRange==true) {
+
+        if ((isRatingANumber==true && areNumbersInRange==true) || userWantsToRate==false) {
 
             // Update the movie properties in the MainWindowController
             mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
@@ -73,5 +74,9 @@ public class AddMovieWindowController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    private void rateMovie(){
+
     }
 }
