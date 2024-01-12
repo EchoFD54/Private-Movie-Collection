@@ -25,7 +25,7 @@ public class Category {
     }
 
     public IntegerProperty getId() {
-        return id;
+        return this.id;
     }
 
     public StringProperty getMovies() {

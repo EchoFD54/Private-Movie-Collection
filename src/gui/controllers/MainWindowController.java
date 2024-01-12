@@ -28,18 +28,19 @@ public class MainWindowController {
     @FXML
     public TextField filterTextField;
     @FXML
-    private TableView<Category> categoryTableView;
-    @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
     private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn;
-    @FXML
     private int movieIndex;
+    private int categoryIndex;
     @FXML
     private MovieManager movieManager = new MovieManager();
     @FXML
-    private CategoryManager categoryManager = new CategoryManager();
+    public CategoryManager categoryManager = new CategoryManager();
     private Boolean isFilterActive = false;
+    public TableView<Category> categoryTableView;
+
+    private Category selectedCategory;
 
     @FXML
     private void initialize() {
@@ -117,6 +118,14 @@ public class MainWindowController {
             if (newValue.isEmpty()) {
                 clearFilter();
             }
+        });
+
+        // Set listener for selecting a category.
+        categoryTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
+            this.selectedCategory = selectedCategory;
+
+            System.out.println(selectedCategory);
         });
     }
 
@@ -243,7 +252,7 @@ public class MainWindowController {
         categoryTableView.setItems(categories);  // Update the category view
     }
 
-    protected void editCategory(String selectedCategoryName, Category newCategoryName) {
+    public void editCategory(String selectedCategoryName, Category newCategoryName) {
         newCategoryName.setName(selectedCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
         int index = categories.indexOf(selectedCategoryName);
@@ -251,11 +260,6 @@ public class MainWindowController {
             categories.set(index, newCategoryName);  // Update the name of the category
             categoryTableView.setItems(categories);  // Update the category table view
         }
-    }
-
-    private void deleteCategory() {
-        categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
-        refreshCategoryTableView();
     }
 
     @FXML
@@ -269,11 +273,11 @@ public class MainWindowController {
     }
 
     @FXML
-    private void deleteMovieInCategory(ActionEvent actionEvent) {
+    private void deleteMovieOnCategory(ActionEvent actionEvent) {
         Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
             Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
-            categoryManager.deleteMovieOnPlaylist(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
+            categoryManager.deleteMovieOnPlaylist((Integer) selectedMovie.songIdProperty().get(), selectedCategory.getId().get());
             movieInCatTableView.getItems().remove(selectedMovie);
             refreshCategoryTableView();
         }
@@ -312,10 +316,13 @@ public class MainWindowController {
     public void clickNewCategory(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/NewCategoryController.fxml"));
         Parent root;
+        System.out.println("This:" + this);
         try {
             root = loader.load();
             NewCategoryController newCategoryController = loader.getController();
             newCategoryController.setMainWindowController(this);
+
+
             Stage stage = new Stage();
             stage.setTitle("Add Category");
             stage.setScene(new Scene(root));
@@ -324,7 +331,6 @@ public class MainWindowController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void editCategory() {
@@ -347,6 +353,7 @@ public class MainWindowController {
             e.printStackTrace();
         }
     }
+
     public void clickEditMovie(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
 
@@ -387,6 +394,23 @@ public class MainWindowController {
         }
     }
 
+    @FXML
+    public void removeCategory() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/RemoveCategory.fxml"));
+            Parent root = loader.load();
 
+            RemoveCategoryController deleteController = loader.getController();
+            deleteController.setMainWindowController(this);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Remove Category");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

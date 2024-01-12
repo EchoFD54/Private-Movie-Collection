@@ -8,13 +8,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.EditCategoryController">
    <children>
-      <Text layoutX="162.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="51.200000000000045">
+      <Text layoutX="64.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Category Name" textAlignment="CENTER" wrappingWidth="149.60000000000002">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
       <TextField fx:id="editCategoryName" layoutX="214.0" layoutY="174.0" />
-      <Button fx:id="saveBtn" layoutX="227.0" layoutY="221.0" mnemonicParsing="false" onAction="#saveEditCategoryButton" prefHeight="26.0" prefWidth="51.0" text="Save" textFill="#179c10" />
-      <Button fx:id="cancelBtn" layoutX="302.0" layoutY="221.0" mnemonicParsing="false" onAction="#cancelEditCategoryButton" text="Cancel" textFill="#bf5353" />
+      <Button fx:id="saveBtn" layoutX="223.0" layoutY="219.0" mnemonicParsing="false" onAction="#saveEditCategoryButton" prefHeight="26.0" prefWidth="60.0" text="Confirm" textFill="#179c10" />
+      <Button fx:id="cancelBtn" layoutX="302.0" layoutY="218.0" mnemonicParsing="false" onAction="#cancelEditCategoryButton" text="Cancel" textFill="#bf5353">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
    </children>
 </AnchorPane>
