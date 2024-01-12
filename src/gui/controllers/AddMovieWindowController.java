@@ -13,6 +13,7 @@ public class AddMovieWindowController {
     public TextField fileField, titleField, personalRatingField, imdbRatingField;
     public Button browseFileBtn, addMovieBtn;
     private MainWindowController mainWindowController;
+    private Stage stage;
 
     public void setMainWindowController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
@@ -41,5 +42,9 @@ public class AddMovieWindowController {
 
         // Close the AddMovieWindow
         ((Stage) titleField.getScene().getWindow()).close();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
