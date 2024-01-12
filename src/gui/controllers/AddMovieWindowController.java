@@ -16,6 +16,7 @@ public class AddMovieWindowController {
     private MainWindowController mainWindowController;
     private Stage stage;
     private boolean isRatingANumber=true;
+    private boolean areNumbersInRange;
 
     public void setMainWindowController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
@@ -36,17 +37,24 @@ public class AddMovieWindowController {
         // Retrieve the movie properties from the text fields
         String title = titleField.getText();
         String imdbRating = imdbRatingField.getText();
+
         String personalRating = personalRatingField.getText();
         try {
             float truePRating = Float.parseFloat(personalRating);
             isRatingANumber=true;
+
+            if (truePRating>=0 && truePRating<=10){
+                areNumbersInRange=true;
+            } else {
+                areNumbersInRange = false;
+            }
         }
         catch (NumberFormatException ex){
             isRatingANumber=false;
         }
 
         String filePath = fileField.getText();
-        if (isRatingANumber==true) {
+        if (isRatingANumber==true && areNumbersInRange==true) {
 
             // Update the movie properties in the MainWindowController
             mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
@@ -54,9 +62,9 @@ public class AddMovieWindowController {
             // Close the AddMovieWindow
             ((Stage) titleField.getScene().getWindow()).close();
         }
-        else if (!isRatingANumber){
+        else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Not a Number");
+            alert.setTitle("Rating error");
             alert.setHeaderText(null);
             alert.setContentText("Please input a number from 0 to 10");
             alert.showAndWait();
