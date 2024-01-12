@@ -32,6 +32,7 @@ public class NewCategoryController {
         closeWindow();
     }
 
+
     private void closeWindow(){
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
