@@ -1,6 +1,7 @@
 package gui.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -14,6 +15,8 @@ public class AddMovieWindowController {
     public Button browseFileBtn, addMovieBtn;
     private MainWindowController mainWindowController;
     private Stage stage;
+    private boolean isRatingANumber=true;
+    private boolean areNumbersInRange;
 
     public void setMainWindowController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
@@ -34,14 +37,38 @@ public class AddMovieWindowController {
         // Retrieve the movie properties from the text fields
         String title = titleField.getText();
         String imdbRating = imdbRatingField.getText();
+
         String personalRating = personalRatingField.getText();
+        try {
+            float truePRating = Float.parseFloat(personalRating);
+            isRatingANumber=true;
+
+            if (truePRating>=0 && truePRating<=10){
+                areNumbersInRange=true;
+            } else {
+                areNumbersInRange = false;
+            }
+        }
+        catch (NumberFormatException ex){
+            isRatingANumber=false;
+        }
+
         String filePath = fileField.getText();
+        if ((isRatingANumber && areNumbersInRange)||personalRating.isEmpty()) {
 
-        // Update the movie properties in the MainWindowController
-        mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
+            // Update the movie properties in the MainWindowController
+            mainWindowController.updateMovieProperties(title, imdbRating, personalRating, filePath);
 
-        // Close the AddMovieWindow
-        ((Stage) titleField.getScene().getWindow()).close();
+            // Close the AddMovieWindow
+            ((Stage) titleField.getScene().getWindow()).close();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Rating error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please input a number from 0 to 10");
+            alert.showAndWait();
+        }
     }
 
     public void setStage(Stage stage) {

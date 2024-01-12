@@ -332,6 +332,28 @@ public class MainWindowController {
         }
     }
 
+    @FXML
+    private void editCategory() {
+        Category selectedCategoryName = categoryTableView.getSelectionModel().getSelectedItems().get(0);  // Retrieve the selected category name
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/EditCategory.fxml"));
+            Parent root = loader.load();
+
+            EditCategoryController editCategoryController = loader.getController();
+            editCategoryController.setMainWindowController(this);
+            editCategoryController.setSelectedCategoryName(selectedCategoryName); // Pass the selected category name
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Category");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void clickEditMovie(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
 
@@ -372,29 +394,6 @@ public class MainWindowController {
         }
     }
 
-
-    @FXML
-    public void editCategory() {
-        Category selectedCategoryName = categoryTableView.getSelectionModel().getSelectedItems().get(0);  // Retrieve the selected category name
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/EditCategory.fxml"));
-            Parent root = loader.load();
-
-            EditCategoryController editCategoryController = loader.getController();
-            editCategoryController.setMainWindowController(this);
-            editCategoryController.setSelectedCategoryName(selectedCategoryName); // Pass the selected category name
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Edit Category");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void removeCategory() {
         try{
@@ -406,14 +405,12 @@ public class MainWindowController {
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Delete Playlist");
+            stage.setTitle("Remove Category");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
 }
