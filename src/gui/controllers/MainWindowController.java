@@ -347,7 +347,6 @@ public class MainWindowController {
             e.printStackTrace();
         }
     }
-=======
     public void clickEditMovie(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
 
