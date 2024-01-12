@@ -7,17 +7,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.RemoveCategoryController">
    <children>
-      <Button fx:id="confirmRemoveCategoryBtn" layoutX="207.0" layoutY="213.0" mnemonicParsing="false" onAction="#confirmRemoveCategory" prefWidth="75.0" text="Confirm" textAlignment="CENTER" textFill="#1e9c37">
+      <Button fx:id="confirmRemoveCategoryBtn" layoutX="207.0" layoutY="213.0" mnemonicParsing="false" onAction="#confirmRemoveCategoryButton" prefWidth="75.0" text="Confirm" textAlignment="CENTER" textFill="#1e9c37">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="cancelRemoveCategoryBtn" layoutX="312.0" layoutY="213.0" mnemonicParsing="false" onAction="#cancelRemoveCategory" text="Cancel" textFill="#c73131">
+      <Button fx:id="cancelRemoveCategoryBtn" layoutX="312.0" layoutY="213.0" mnemonicParsing="false" onAction="#cancelRemoveCategoryButton" text="Cancel" textFill="#c73131">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Text fx:id="removeCategoryConfirmation" layoutX="121.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to remove this category?">
+      <Text layoutX="121.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to remove this category?">
          <font>
             <Font size="17.0" />
          </font>
