@@ -120,7 +120,7 @@ public class MainWindowController {
             }
         });
 
-        // Add a listener for the minimum IMDB rating TextField
+        //  listener for the minimum IMDB rating TextField
         minImdbRatingTextField.textProperty().addListener((observable, oldValue, newValue) -> applyFilter());
 
         // Set listener for selecting a category.
