@@ -26,7 +26,7 @@ import java.util.List;
 
 public class MainWindowController {
     @FXML
-    public TextField filterTextField;
+    public TextField filterTextField, minImdbRatingTextField;
     @FXML
     private TableView<Movie> movieTableView, movieInCatTableView;
     @FXML
@@ -119,6 +119,9 @@ public class MainWindowController {
                 clearFilter();
             }
         });
+
+        // Add a listener for the minimum IMDB rating TextField
+        minImdbRatingTextField.textProperty().addListener((observable, oldValue, newValue) -> applyFilter());
 
         // Set listener for selecting a category.
         categoryTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -293,11 +296,14 @@ public class MainWindowController {
 
     private void applyFilter() {
         String filterQuery = filterTextField.getText().toLowerCase();
+        String minImdbRatingStr = minImdbRatingTextField.getText();
+
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
 
-        for (Movie song : movieManager.getAllMovies()) {
-            if (song.getTitle().get().toLowerCase().contains(filterQuery)) { //|| song.artistProperty().get().toLowerCase().contains(filterQuery))
-                filteredMovies.add(song);
+        for (Movie movie : movieManager.getAllMovies()) {
+            // Check if the title contains the filter query and IMDB rating is greater than or equal to the minimum
+            if (movie.getTitle().get().toLowerCase().contains(filterQuery) && compareImdbRating(movie.getImdbRating().get(), minImdbRatingStr) >= 0) {
+                filteredMovies.add(movie);
             }
         }
 
@@ -306,11 +312,22 @@ public class MainWindowController {
         isFilterActive = true;
     }
 
+
     private void clearFilter() {
         movieTableView.setItems(FXCollections.observableArrayList(movieManager.getAllMovies()));
         filterTextField.clear();
         filterBtn.setText("Filter");
         isFilterActive = false;
+    }
+
+    private int compareImdbRating(String imdbRating1, String imdbRating2) {
+        try {
+            double rating1 = Double.parseDouble(imdbRating1);
+            double rating2 = Double.parseDouble(imdbRating2);
+            return Double.compare(rating1, rating2);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     public void clickNewCategory(ActionEvent actionEvent) {

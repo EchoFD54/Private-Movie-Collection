@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainWindowController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainWindowController">
    <children>
       <HBox prefHeight="72.0" prefWidth="800.0">
          <children>
@@ -38,18 +38,19 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="59.0" prefWidth="281.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="59.0" prefWidth="299.0">
                <children>
+                  <TextField fx:id="filterTextField" prefHeight="31.0" prefWidth="109.0" promptText="Title of Movie">
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" />
+                     </HBox.margin>
+                  </TextField>
                   <Button fx:id="filterBtn" mnemonicParsing="false" onAction="#toggleFilterBtn" text="Filter">
                      <HBox.margin>
                         <Insets bottom="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <TextField fx:id="filterTextField" promptText="Title of Movie">
-                     <HBox.margin>
-                        <Insets bottom="10.0" right="10.0" />
-                     </HBox.margin>
-                  </TextField>
+                  <TextField fx:id="minImdbRatingTextField" prefHeight="31.0" prefWidth="62.0" promptText="IMDB " />
                </children>
             </HBox>
          </children>
