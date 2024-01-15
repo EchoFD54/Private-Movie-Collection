@@ -5,6 +5,7 @@ import be.Movie;
 import bll.CategoryManager;
 import bll.MovieManager;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,6 +64,11 @@ public class MainWindowController {
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
         imdbRatingColumn.setCellValueFactory(cellData -> cellData.getValue().getImdbRating());
         personalRatingColumn.setCellValueFactory(cellData -> cellData.getValue().getPersonalRating());
+        categories.setCellValueFactory(cellData -> {
+                    int movieId = cellData.getValue().getMovieId().get();
+                    String totalCategories = categoriesInMovies(movieId).toString();
+                    return new SimpleStringProperty(totalCategories);
+                });
         lastWatchedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastWatched());
     }
 
@@ -127,8 +133,6 @@ public class MainWindowController {
         categoryTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
             this.selectedCategory = selectedCategory;
-
-            System.out.println(selectedCategory);
         });
     }
 
@@ -148,6 +152,10 @@ public class MainWindowController {
         for (Movie m : categoryManager.getAllMoviesOfCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get())) {
             movieInCatTableView.getItems().add(m);
         }
+    }
+
+    public List<Category> categoriesInMovies(int movieId) {
+        return movieManager.getAllCategoriesOfMovie(movieId);
     }
 
     public void openNewMovieWindow(ActionEvent actionEvent) {
@@ -191,7 +199,6 @@ public class MainWindowController {
             // Adds a new movie in the database
             int idMovie = movieManager.createMovie(newMovie);
             newMovie.setMovieId(idMovie);
-            System.out.println(newMovie.getMovieId().get());
             movieTableView.getItems().add(newMovie);
         }
     }
@@ -207,7 +214,6 @@ public class MainWindowController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println(filePath);
             System.out.println("Cannot play the selected movie. File does not exist or Desktop is not supported.");
         }
     }

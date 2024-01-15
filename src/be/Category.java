@@ -39,4 +39,9 @@ public class Category {
     public void setMovies(String movies) {
         this.movies.set(movies);
     }
+
+    @Override
+    public String toString() {
+        return  name.get();
+    }
 }

@@ -1,5 +1,6 @@
 package dal;
 
+import be.Category;
 import be.Movie;
 
 import java.sql.*;
@@ -86,6 +87,30 @@ public class MovieDAO implements IMovieDAO{
                 movies.add(m);
             }
             return movies;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Category> getAllCategoriesOfMovie(int movieId) {
+        List<Category> categoriesInMovie = new ArrayList<>();
+        try(Connection con = cm.getConnection())
+        {
+            String sql = "select *\n" +
+                    "from Category c\n" +
+                    "inner join CatMovie cm on c.Id = cm.CategoryId\n" +
+                    "where MoviesId = (?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, movieId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //int id                = rs.getInt("Id");
+                String name           = rs.getString("Name");
+
+                Category c = new Category(name);
+                categoriesInMovie.add(c);
+            }
+            return categoriesInMovie;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

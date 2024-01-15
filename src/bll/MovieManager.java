@@ -1,5 +1,6 @@
 package bll;
 
+import be.Category;
 import be.Movie;
 import dal.IMovieDAO;
 import dal.MovieDAO;
@@ -36,5 +37,12 @@ public class MovieManager {
      */
     public List<Movie> getAllMovies() {
         return movieDAO.getAllMovies();
+    }
+
+    /**
+     * @return a list of all Movies saved on the Database
+     */
+    public List<Category> getAllCategoriesOfMovie(int movieId) {
+        return movieDAO.getAllCategoriesOfMovie(movieId);
     }
 }
