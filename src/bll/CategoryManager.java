@@ -58,7 +58,7 @@ public class CategoryManager {
     /**
      * Deletes a movie from a category on the Database
      */
-    public void deleteMovieOnPlaylist(int movieId, int categoryId){
-        categoryDAO.deleteMovieFromCategory(movieId, categoryId);
+    public void removeMovieFromCategory(int movieId, int categoryId){
+        categoryDAO.removeMovieFromCategory(movieId, categoryId);
     }
 }

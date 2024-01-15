@@ -146,7 +146,7 @@ public class CategoryDAO implements ICategoryDAO{
     }
 
     @Override
-    public void deleteMovieFromCategory(int movieId, int categoryId) {
+    public void removeMovieFromCategory(int movieId, int categoryId) {
         try(Connection con = cm.getConnection())
         {
             String sql = "DELETE FROM CatMovie WHERE MoviesId=? AND CategoryId=?";
