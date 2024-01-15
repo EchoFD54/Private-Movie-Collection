@@ -294,15 +294,24 @@ public class MainWindowController {
     }
 
     @FXML
-    public void deleteMovieOnCategory(ActionEvent actionEvent) {
-        Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
-        if (selectedMovie != null) {
-            Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
-            categoryManager.deleteMovieOnPlaylist(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
-            movieInCatTableView.getItems().remove(selectedMovie);
-            refreshCategoryTableView();
+    public void removeMovieFromCategoryButton() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/RemoveMovieFromCategory.fxml"));
+            Parent root = loader.load();
+
+            RemoveMovieFromCategoryController deleteController = loader.getController();
+            deleteController.setMainWindowController(this);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Remove Movie From this Category");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
 
     public void toggleFilterBtn(ActionEvent actionEvent) {
         if (isFilterActive) {
