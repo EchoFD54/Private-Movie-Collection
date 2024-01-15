@@ -14,8 +14,7 @@ public class MovieManager {
      * Creates a Movie on the Database
      */
     public int createMovie(Movie m) {
-        movieDAO.createMovie(m);
-        return m.getMovieId().get();
+        return movieDAO.createMovie(m);
     }
 
     /**
