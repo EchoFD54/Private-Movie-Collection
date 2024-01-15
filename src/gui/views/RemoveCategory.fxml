@@ -5,14 +5,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.RemoveCategoryController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.RemoveCategoryController">
    <children>
-      <Button fx:id="confirmRemoveCategoryBtn" layoutX="207.0" layoutY="213.0" mnemonicParsing="false" onAction="#confirmRemoveCategoryButton" prefWidth="75.0" text="Confirm" textAlignment="CENTER" textFill="#1e9c37">
+      <Button fx:id="btnConfirmDelete" layoutX="207.0" layoutY="213.0" mnemonicParsing="false" onAction="#confirmDelete" prefWidth="75.0" text="Confirm" textAlignment="CENTER" textFill="#1e9c37">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="cancelRemoveCategoryBtn" layoutX="312.0" layoutY="213.0" mnemonicParsing="false" onAction="#cancelRemoveCategoryButton" text="Cancel" textFill="#c73131">
+      <Button fx:id="btnCancel" layoutX="312.0" layoutY="213.0" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" textFill="#c73131">
          <font>
             <Font size="14.0" />
          </font>

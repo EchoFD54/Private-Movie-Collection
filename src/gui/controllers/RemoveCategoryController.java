@@ -10,9 +10,9 @@ import javafx.stage.Stage;
 
 public class RemoveCategoryController {
     @FXML
-    public Button confirmRemoveCategoryBtn;
+    public Button btnConfirmDelete;
     @FXML
-    public Button cancelRemoveCategoryBtn;
+    public Button btnCancel;
 
     public CategoryManager categoryManager;
 
@@ -24,16 +24,15 @@ public class RemoveCategoryController {
         this.mainWindowController = controller;
     }
 
-    public void confirmRemoveCategoryButton(ActionEvent actionEvent) {
-        this.mainWindowController.categoryManager.deleteCategory(this.mainWindowController.categoryTableView.getSelectionModel().getSelectedItem().getId().get());
-        this.mainWindowController.refreshCategoryTableView();
+    public void confirmDelete(ActionEvent actionEvent) {
+        mainWindowController.deleteCategory();
 
-        Stage stage = (Stage) confirmRemoveCategoryBtn.getScene().getWindow();
+        Stage stage = (Stage) btnConfirmDelete.getScene().getWindow();
         stage.close();
     }
 
-    public void cancelRemoveCategoryButton(ActionEvent actionEvent){
-        Stage stage = (Stage) cancelRemoveCategoryBtn.getScene().getWindow();
+    public void cancelAction(ActionEvent actionEvent){
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
 }

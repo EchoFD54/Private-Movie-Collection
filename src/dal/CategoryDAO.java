@@ -66,8 +66,8 @@ public class CategoryDAO implements ICategoryDAO{
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
-                int id          = rs.getInt("Id");
-                String name    = rs.getString("Name");
+                int id      = rs.getInt("Id");
+                String name = rs.getString("Name");
 
                 Category c = new Category(id, name);
                 categories.add(c);
@@ -134,8 +134,8 @@ public class CategoryDAO implements ICategoryDAO{
             ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                int id          = rs.getInt("Id");
-                String name     = rs.getString("Name");
+                int id      = rs.getInt("Id");
+                String name = rs.getString("Name");
 
                 return new Category(id, name);
             }

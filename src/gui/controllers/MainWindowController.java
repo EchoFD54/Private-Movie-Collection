@@ -111,7 +111,7 @@ public class MainWindowController {
         });
 
         // Set the event handler for the addMovies button
-        newMovieBtn.setOnAction(this::clickNewMovieBtn);
+        newMovieBtn.setOnAction(this::openNewMovieWindow);
 
         //event handler for the filter function
         filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -150,7 +150,7 @@ public class MainWindowController {
         }
     }
 
-    public void clickNewMovieBtn(ActionEvent actionEvent) {
+    public void openNewMovieWindow(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/AddMovieWindow.fxml"));
         Parent root;
         try {
@@ -212,7 +212,7 @@ public class MainWindowController {
         }
     }
 
-    public void clickDelBtn(ActionEvent actionEvent) {
+    public void openDeleteMovieWindow(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -249,10 +249,22 @@ public class MainWindowController {
         categoryTableView.getItems().addAll(allCategories);
     }
 
+    /**
+     * Code not needed?
+     * Or we can just refresh cat table view and use the category manager here (only)
+     * Nelson
+     */
+    /*
     protected void createCategory(Category categoryName) {
         ObservableList<Category> categories = categoryTableView.getItems();
         categories.add(categoryName);  // Add the new category name to the list
         categoryTableView.setItems(categories);  // Update the category view
+    }
+     */
+
+    public void deleteCategory(){
+        categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
+        refreshCategoryTableView();
     }
 
     public void editCategory(String selectedCategoryName, Category newCategoryName) {
@@ -276,11 +288,11 @@ public class MainWindowController {
     }
 
     @FXML
-    private void deleteMovieOnCategory(ActionEvent actionEvent) {
+    public void deleteMovieOnCategory(ActionEvent actionEvent) {
         Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
             Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
-            categoryManager.deleteMovieOnPlaylist((Integer) selectedMovie.songIdProperty().get(), selectedCategory.getId().get());
+            categoryManager.deleteMovieOnPlaylist(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
             movieInCatTableView.getItems().remove(selectedMovie);
             refreshCategoryTableView();
         }
@@ -330,10 +342,9 @@ public class MainWindowController {
         }
     }
 
-    public void clickNewCategory(ActionEvent actionEvent) {
+    public void openNewCategoryWindow(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/NewCategoryController.fxml"));
         Parent root;
-        System.out.println("This:" + this);
         try {
             root = loader.load();
             NewCategoryController newCategoryController = loader.getController();
@@ -350,7 +361,7 @@ public class MainWindowController {
     }
 
     @FXML
-    private void editCategory() {
+    private void openEditCategoryWindow() {
         Category selectedCategoryName = categoryTableView.getSelectionModel().getSelectedItems().get(0);  // Retrieve the selected category name
 
         try {
@@ -371,7 +382,7 @@ public class MainWindowController {
         }
     }
 
-    public void clickEditMovie(ActionEvent actionEvent) {
+    public void openEditMovieWindow(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
 
         if (selectedMovie != null) {
@@ -412,7 +423,7 @@ public class MainWindowController {
     }
 
     @FXML
-    public void removeCategory() {
+    public void openRemoveCategoryWindow() {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/RemoveCategory.fxml"));
             Parent root = loader.load();

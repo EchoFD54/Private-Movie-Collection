@@ -14,7 +14,6 @@ public class Movie {
     private StringProperty lastWatched;
     private StringProperty filePath;
     private IntegerProperty movieId = new SimpleIntegerProperty();
-    private Category category;
 
     public Movie(int movieId, String title, String imdbRating, String personalRating, String filePath, String lastWatched){
         this.movieId = new SimpleIntegerProperty(movieId);
@@ -80,11 +79,4 @@ public class Movie {
         this.movieId.set(movieId);
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Reference<Object> songIdProperty() {
-        return null;
-    }
 }

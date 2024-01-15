@@ -20,7 +20,7 @@ public class NewCategoryController {
         String categoryName = nameField.getText().trim();
         Category category = new Category(categoryName);
         if (categoryName != null){
-            mainWindowController.createCategory(category);
+            //mainWindowController.createCategory(category); // Code not needed?
             categoryManager.createCategory(category);
             mainWindowController.refreshCategoryTableView();
             closeWindow();
