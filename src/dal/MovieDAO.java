@@ -27,7 +27,7 @@ public class MovieDAO implements IMovieDAO{
 
             try (ResultSet keys = pstmt.getGeneratedKeys()) {
                 keys.next();
-                int id = (int) keys.getLong(1);
+                int id = keys.getInt(1);
                 return id;
             }
         } catch (SQLException e) {

@@ -233,7 +233,7 @@ public class MainWindowController {
                     int selectedIndex = movieTableView.getSelectionModel().getSelectedIndex();
 
                     // Remove the movie from the Database, TableView and Categories
-                    movieManager.deleteMovie(selectedMovie.getMovieId().getValue());
+                    movieManager.deleteMovie(selectedMovie.getMovieId().get());
                     movieTableView.getItems().remove(selectedIndex);
                     refreshCategoryTableView();
                 }
