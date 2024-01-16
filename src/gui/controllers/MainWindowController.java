@@ -29,7 +29,7 @@ public class MainWindowController {
     @FXML
     public TextField filterTextField, minImdbRatingTextField;
     @FXML
-    private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn;
+    private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn, playBtn;
     private int movieIndex;
     private int categoryIndex;
     @FXML
@@ -112,7 +112,7 @@ public class MainWindowController {
             int selectedMovieIndex = movieTableView.getSelectionModel().getSelectedIndex();
             if (selectedMovieIndex >= 0) {
                 movieIndex = selectedMovieIndex;
-                playSelectedMovie(newValue);
+                selectedMovie = newValue;
             }
         });
 
@@ -461,6 +461,20 @@ public class MainWindowController {
             categoryManager.removeMovieFromCategory(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
             movieInCatTableView.getItems().remove(selectedMovie);
             refreshCategoryTableView();
+        }
+    }
+
+    public void clickPlayBtn(ActionEvent actionEvent) {
+        // Check if a movie is selected in the TableView
+        if (selectedMovie != null) {
+            playSelectedMovie(selectedMovie);
+        } else {
+            // Show an alert or message indicating that no Movie is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Movie Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a Movie to play.");
+            alert.showAndWait();
         }
     }
 }
