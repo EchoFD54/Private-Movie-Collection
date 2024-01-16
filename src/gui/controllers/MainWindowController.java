@@ -218,6 +218,20 @@ public class MainWindowController {
         }
     }
 
+    public void clickPlayBtn(ActionEvent actionEvent) {
+        // Check if a movie is selected in the TableView
+        if (selectedMovie != null) {
+            playSelectedMovie(selectedMovie);
+        } else {
+            // Show an alert or message indicating that no Movie is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Movie Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a Movie to play.");
+            alert.showAndWait();
+        }
+    }
+
     public void openDeleteMovieWindow(ActionEvent actionEvent) {
         Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
@@ -464,18 +478,6 @@ public class MainWindowController {
         }
     }
 
-    public void clickPlayBtn(ActionEvent actionEvent) {
-        // Check if a movie is selected in the TableView
-        if (selectedMovie != null) {
-            playSelectedMovie(selectedMovie);
-        } else {
-            // Show an alert or message indicating that no Movie is selected
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Movie Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a Movie to play.");
-            alert.showAndWait();
-        }
-    }
+
 }
 
