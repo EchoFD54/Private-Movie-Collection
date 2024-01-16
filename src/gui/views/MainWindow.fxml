@@ -171,7 +171,7 @@
             </HBox>
             <HBox prefHeight="88.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="removeMovieFromCategoryBtn" mnemonicParsing="false" onAction="#removeMovieFromCategoryButton" text="Remove Movie from Category">
+                  <Button fx:id="openRemoveMovieFromCategoryBtn" mnemonicParsing="false" onAction="#openRemoveMovieFromCategoryButton" text="Remove Movie from Category">
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />
                      </HBox.margin>

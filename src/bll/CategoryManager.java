@@ -31,6 +31,7 @@ public class CategoryManager {
         categoryDAO.deleteCategory(categoryId);
     }
 
+
     /**
      * @return a list of categories
      * Gets all the categories saved on the Database
@@ -55,10 +56,5 @@ public class CategoryManager {
         return categoryDAO.getAllMoviesOfCategory(categoryId);
     }
 
-    /**
-     * Deletes a movie from a category on the Database
-     */
-    public void removeMovieFromCategory(int movieId, int categoryId){
-        categoryDAO.removeMovieFromCategory(movieId, categoryId);
-    }
+
 }

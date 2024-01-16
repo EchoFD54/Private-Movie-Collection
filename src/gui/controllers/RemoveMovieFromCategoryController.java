@@ -13,19 +13,13 @@ public class RemoveMovieFromCategoryController {
     public Button confirmRemoveMovieFromCategoryBtn;
     @FXML
     public Button cancelRemoveMovieFromCategoryBtn;
-
-    public CategoryManager categoryManager;
-
-    public TableView<Category> categoryTableView;
-
     private MainWindowController mainWindowController;
 
     public void setMainWindowController(MainWindowController controller){
         this.mainWindowController = controller;
     }
-
     public void confirmRemoveMovieFromCategoryButton(ActionEvent actionEvent) {
-        mainWindowController.deleteCategory();
+        mainWindowController.confirmRemoveMovieFromCategoryButton();
 
         Stage stage = (Stage) confirmRemoveMovieFromCategoryBtn.getScene().getWindow();
         stage.close();

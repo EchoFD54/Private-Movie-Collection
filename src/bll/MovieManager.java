@@ -2,13 +2,12 @@ package bll;
 
 import be.Category;
 import be.Movie;
-import dal.IMovieDAO;
 import dal.MovieDAO;
 
 import java.util.List;
 
 public class MovieManager {
-    IMovieDAO movieDAO = new MovieDAO();
+    MovieDAO movieDAO = new MovieDAO();
 
     /**
      * Creates a Movie on the Database
@@ -44,4 +43,13 @@ public class MovieManager {
     public List<Category> getAllCategoriesOfMovie(int movieId) {
         return movieDAO.getAllCategoriesOfMovie(movieId);
     }
+
+    /**
+     * Deletes a movie from a category on the Database
+     */
+    public void confirmRemoveMovieFromCategoryButton(int movieId){
+        movieDAO.confirmRemoveMovieFromCategoryButton(movieId);
+    }
 }
+
+

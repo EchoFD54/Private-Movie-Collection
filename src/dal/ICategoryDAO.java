@@ -44,9 +44,5 @@ public interface ICategoryDAO {
      */
     Category getCategoryById(int categoryId);
 
-    /**
-     * Deletes a movie in a category
-     */
-    void removeMovieFromCategory(int movieId, int categoryId);
 
 }

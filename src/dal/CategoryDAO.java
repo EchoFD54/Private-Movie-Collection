@@ -145,7 +145,6 @@ public class CategoryDAO implements ICategoryDAO{
         return null;
     }
 
-    @Override
     public void removeMovieFromCategory(int movieId, int categoryId) {
         try(Connection con = cm.getConnection())
         {

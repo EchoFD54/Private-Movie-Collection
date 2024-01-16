@@ -31,4 +31,14 @@ public interface IMovieDAO {
      * @return a list of all Movies saved on the Database
      */
     public List<Category> getAllCategoriesOfMovie(int movieId);
+
+
+    /**
+     * Deletes a movie in a category
+     */
+    void confirmRemoveMovieFromCategoryButton(int movieId, int categoryId);
+
+    void removeMovieFromCategoryButton(int movieId, int categoryId);
+
+    void confirmRemoveMovieFromCategoryButton(int movieId);
 }

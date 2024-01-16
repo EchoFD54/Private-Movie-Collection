@@ -13,24 +13,16 @@ public class RemoveCategoryController {
     public Button btnConfirmDelete;
     @FXML
     public Button btnCancel;
-
-    public CategoryManager categoryManager;
-
-    public TableView<Category> categoryTableView;
-
     private MainWindowController mainWindowController;
-
     public void setMainWindowController(MainWindowController controller){
         this.mainWindowController = controller;
     }
-
     public void confirmDelete(ActionEvent actionEvent) {
         mainWindowController.deleteCategory();
 
         Stage stage = (Stage) btnConfirmDelete.getScene().getWindow();
         stage.close();
     }
-
     public void cancelAction(ActionEvent actionEvent){
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
