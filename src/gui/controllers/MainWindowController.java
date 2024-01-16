@@ -410,10 +410,12 @@ public class MainWindowController {
             alert.showAndWait();
         }
     }
+
     public void deleteCategory() {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
     }
+
     @FXML
     public void openRemoveCategoryWindow() {
         try {
@@ -432,6 +434,7 @@ public class MainWindowController {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void openRemoveMovieFromCategoryButton() {
         try {
@@ -451,14 +454,14 @@ public class MainWindowController {
         }
     }
 
-    public void confirmRemoveMovieFromCategoryButton(){
+    public void confirmRemoveMovieFromCategoryButton() {
         Movie selectedMovie = movieInCatTableView.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
-            movieManager.confirmRemoveMovieFromCategoryButton(movieInCatTableView.getSelectionModel().getSelectedItem().getMovieId().get());
+            Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
+            categoryManager.removeMovieFromCategory(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
             movieInCatTableView.getItems().remove(selectedMovie);
+            refreshCategoryTableView();
         }
-        refreshCategoryTableView();
     }
 }
-
 

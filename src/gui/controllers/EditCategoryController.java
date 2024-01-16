@@ -22,6 +22,7 @@ public class EditCategoryController {
         this.selectedCategory = categoryName;
         editCategoryName.setText(categoryName.getName().get());
     }
+
     public void saveEditCategoryButton(){
         if (selectedCategory != null) {
             String newCategory = editCategoryName.getText().trim();
@@ -33,6 +34,7 @@ public class EditCategoryController {
             }
         }
     }
+
     private void closeEditedWindow(){
         Stage stage = (Stage) editCategoryName.getScene().getWindow();
         stage.close();

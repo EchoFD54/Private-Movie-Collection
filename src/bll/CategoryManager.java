@@ -56,5 +56,11 @@ public class CategoryManager {
         return categoryDAO.getAllMoviesOfCategory(categoryId);
     }
 
+    /**
+     * Deletes a movie from a category on the Database
+     */
+    public void removeMovieFromCategory(int movieId, int categoryId){
+        categoryDAO.removeMovieFromCategory(movieId, categoryId);
+    }
 
 }

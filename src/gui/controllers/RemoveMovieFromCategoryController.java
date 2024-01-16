@@ -18,6 +18,7 @@ public class RemoveMovieFromCategoryController {
     public void setMainWindowController(MainWindowController controller){
         this.mainWindowController = controller;
     }
+
     public void confirmRemoveMovieFromCategoryButton(ActionEvent actionEvent) {
         mainWindowController.confirmRemoveMovieFromCategoryButton();
 

@@ -11,6 +11,8 @@ public class NewCategoryController {
     private TextField nameField;
     private MainWindowController mainWindowController;
     private CategoryManager categoryManager = new CategoryManager();
+
+
     public void setMainWindowController(MainWindowController controller){
         this.mainWindowController = controller;
     }

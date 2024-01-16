@@ -43,13 +43,6 @@ public class MovieManager {
     public List<Category> getAllCategoriesOfMovie(int movieId) {
         return movieDAO.getAllCategoriesOfMovie(movieId);
     }
-
-    /**
-     * Deletes a movie from a category on the Database
-     */
-    public void confirmRemoveMovieFromCategoryButton(int movieId){
-        movieDAO.confirmRemoveMovieFromCategoryButton(movieId);
-    }
 }
 
 

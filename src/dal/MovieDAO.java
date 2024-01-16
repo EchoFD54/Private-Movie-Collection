@@ -115,28 +115,4 @@ public class MovieDAO implements IMovieDAO{
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-    public void confirmRemoveMovieFromCategoryButton(int movieId, int categoryId) {
-
-    }
-
-    @Override
-    public void removeMovieFromCategoryButton(int movieId, int categoryId) {
-        try(Connection con = cm.getConnection())
-        {
-            String sql = "DELETE FROM CatMovie WHERE MoviesId=? AND CategoryId=?";
-            String sql1 = "DELETE FROM Category WHERE Id=?";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, movieId);
-            pstmt.setInt(2, categoryId);
-            pstmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @Override
-    public void confirmRemoveMovieFromCategoryButton(int movieId) {
-
-    }
 }
