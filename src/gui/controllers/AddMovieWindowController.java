@@ -27,7 +27,7 @@ public class AddMovieWindowController {
         fileChooser.setTitle("Choose Movie File");
         File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (selectedFile != null && selectedFile.getAbsolutePath().endsWith(".mp4")) {
+        if (selectedFile != null && selectedFile.getAbsolutePath().endsWith(".mp4")||selectedFile.getAbsolutePath().endsWith("mpeg4")) {
             // Set the selected file path to the fileField
             fileField.setText(selectedFile.getAbsolutePath());
         }
@@ -35,7 +35,7 @@ public class AddMovieWindowController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Wrong File");
             alert.setHeaderText(null);
-            alert.setContentText("Please select a mp4 file");
+            alert.setContentText("Please select a mp4 or mpeg4 file");
             alert.showAndWait();
         }
     }
