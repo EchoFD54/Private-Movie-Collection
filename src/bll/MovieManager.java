@@ -23,6 +23,10 @@ public class MovieManager {
         movieDAO.updateMovie(m);
     }
 
+    public void updateLastViewDate(Movie m, String date){
+        movieDAO.updateLastViewDate(m, date);
+    }
+
     /**
      * Deletes a Movie on the Database
      */

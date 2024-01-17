@@ -23,8 +23,6 @@ public class MovieDAO implements IMovieDAO{
             //pstmt.setString(5, m.getLastWatched().get());
             pstmt.execute();
 
-            //int affectedRows = pstmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-
             try (ResultSet keys = pstmt.getGeneratedKeys()) {
                 keys.next();
                 int id = keys.getInt(1);
@@ -43,6 +41,19 @@ public class MovieDAO implements IMovieDAO{
             pstmt.setString(1, m.getTitle().get());
             pstmt.setString(2, m.getPersonalRating().get());
             pstmt.setInt(3, m.getMovieId().get());
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateLastViewDate(Movie m, String date) {
+        try(Connection con = cm.getConnection())
+        {
+            String sql = "UPDATE Movies SET LastView=? WHERE Id=?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, date);
+            pstmt.setInt(2, m.getMovieId().get());
             pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

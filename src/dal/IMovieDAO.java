@@ -17,6 +17,8 @@ public interface IMovieDAO {
      */
     void updateMovie(Movie m);
 
+    void updateLastViewDate(Movie m, String date);
+
     /**
      * Deletes a Movie on the Database by the ID
      */

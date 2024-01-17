@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainWindowController {
@@ -66,8 +68,11 @@ public class MainWindowController {
         personalRatingColumn.setCellValueFactory(cellData -> cellData.getValue().getPersonalRating());
         categories.setCellValueFactory(cellData -> {
             int movieId = cellData.getValue().getMovieId().get();
+            //categoriesInMovies(movieId).sort((o1, o2) -> o1.getName().get().compareTo(o2.getName().get()));
+            //categoriesInMovies(movieId).sort(Comparator.comparing(o -> o.getName().get()));
             String totalCategories = categoriesInMovies(movieId).toString();
             return new SimpleStringProperty(totalCategories);
+
         });
         lastWatchedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastWatched());
     }
@@ -222,6 +227,8 @@ public class MainWindowController {
         // Check if a movie is selected in the TableView
         if (selectedMovie != null) {
             playSelectedMovie(selectedMovie);
+            movieManager.updateLastViewDate(selectedMovie, todayDate());
+            refreshMoviesTableView();
         } else {
             // Show an alert or message indicating that no Movie is selected
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -269,6 +276,18 @@ public class MainWindowController {
         categoryTableView.getItems().addAll(allCategories);
     }
 
+    public void refreshMoviesTableView() {
+        movieTableView.getItems().clear();
+        List<Movie> allMovies = movieManager.getAllMovies();
+        movieTableView.getItems().addAll(allMovies);
+    }
+
+    public String todayDate(){
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(currentDate);
+    }
+
     /**
      * Code not needed?
      * Or we can just refresh cat table view and use the category manager here (only)
@@ -299,6 +318,7 @@ public class MainWindowController {
             categoryManager.placeMovieOnCategory(categoryId, movieId);
         }
         refreshCategoryTableView();
+        refreshMoviesTableView();
     }
 
     public void toggleFilterBtn(ActionEvent actionEvent) {
@@ -475,6 +495,7 @@ public class MainWindowController {
             categoryManager.removeMovieFromCategory(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
             movieInCatTableView.getItems().remove(selectedMovie);
             refreshCategoryTableView();
+            refreshMoviesTableView();
         }
     }
 
