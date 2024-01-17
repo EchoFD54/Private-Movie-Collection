@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainWindowController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainWindowController">
    <children>
       <HBox prefHeight="72.0" prefWidth="800.0">
          <children>
@@ -26,7 +26,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="59.0" prefWidth="300.0">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="59.0" prefWidth="107.0">
                <children>
                   <Label text="Movies Library">
                      <font>
@@ -38,22 +38,26 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="59.0" prefWidth="299.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="59.0" prefWidth="490.0">
                <children>
-                  <Button fx:id="playBtn" mnemonicParsing="false" onAction="#clickPlayBtn" text="Play" />
-                  <TextField fx:id="filterTextField" prefHeight="31.0" prefWidth="109.0" promptText="Title of Movie">
+                  <Label text="Search:">
                      <HBox.margin>
-                        <Insets bottom="10.0" right="10.0" />
+                        <Insets bottom="16.0" right="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="filterTextField" prefHeight="31.0" prefWidth="166.0" promptText="By Title or Category">
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="20.0" />
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="filterBtn" mnemonicParsing="false" onAction="#toggleFilterBtn" text="Filter">
                      <HBox.margin>
-                        <Insets bottom="13.0" right="10.0" />
+                        <Insets bottom="13.0" right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <TextField fx:id="minImdbRatingTextField" prefHeight="31.0" prefWidth="62.0" promptText="IMDB ">
+                  <TextField fx:id="minImdbRatingTextField" prefHeight="31.0" prefWidth="100.0" promptText="Minimum IMDB">
                      <HBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="10.0" right="20.0" />
                      </HBox.margin></TextField>
                </children>
             </HBox>
@@ -84,7 +88,7 @@
                             <TableColumn prefWidth="78.0" text="IMDB Rating" />
                               <TableColumn prefWidth="96.0" text="Personal Rating" />
                               <TableColumn prefWidth="149.0" text="Categories" />
-                              <TableColumn prefWidth="107.0" text="Last Viewed" />
+                              <TableColumn prefWidth="104.5467529296875" text="Last Viewed" />
                           </columns>
                         </TableView>
                      </children>
@@ -93,28 +97,28 @@
                      <children>
                         <HBox prefHeight="57.0" prefWidth="369.0">
                            <children>
-                              <Button fx:id="newMovieBtn" mnemonicParsing="false" onAction="#openNewMovieWindow" text="Add Movie to Library">
+                              <Button fx:id="playBtn" mnemonicParsing="false" onAction="#clickPlayBtn" text="Play Movie">
                                  <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                    <Insets left="10.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="editMovieBtn" mnemonicParsing="false" onAction="#openEditMovieWindow" text="Edit Movie">
                                  <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                    <Insets left="10.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#openDeleteMovieWindow" text="Delete Movie">
                                  <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                    <Insets left="10.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="265.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#addSelectedMovieToCategory" text="Add Movie to Category">
+                              <Button fx:id="newMovieBtn" mnemonicParsing="false" onAction="#openNewMovieWindow" prefHeight="26.0" prefWidth="142.0" text="Add Movie to Library">
                                  <HBox.margin>
-                                    <Insets right="2.0" top="5.0" />
+                                    <Insets right="10.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -170,23 +174,19 @@
                   </Button>
                </children>
             </HBox>
-            <HBox prefHeight="88.0" prefWidth="300.0">
+            <HBox prefHeight="49.0" prefWidth="595.0">
                <children>
-                  <Button fx:id="openRemoveMovieFromCategoryBtn" mnemonicParsing="false" onAction="#openRemoveMovieFromCategoryButton" text="Remove Movie from Category">
+                  <Button mnemonicParsing="false" onAction="#addSelectedMovieToCategory" text="Add Movie to Category">
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-               </children></HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="88.0" prefWidth="296.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Play Movie">
+                  <Button fx:id="openRemoveMovieFromCategoryBtn" mnemonicParsing="false" onAction="#openRemoveMovieFromCategoryButton" text="Remove Movie from Category">
                      <HBox.margin>
-                        <Insets bottom="30.0" right="30.0" />
+                        <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-               </children>
-            </HBox>
+               </children></HBox>
          </children>
       </HBox>
    </children>

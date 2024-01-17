@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewCategoryController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewCategoryController">
    <children>
       <TextField fx:id="nameField" layoutX="226.0" layoutY="175.0" />
       <Label layoutX="91.0" layoutY="178.0" prefHeight="19.0" prefWidth="133.0" text="New Category Name" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="addCategoryBtn" layoutX="241.0" layoutY="221.0" mnemonicParsing="false" onAction="#clickAddCategory" text="Confirm" textAlignment="CENTER" textFill="#25a621" />
+      <Button fx:id="addCategoryBtn" layoutX="240.0" layoutY="220.0" mnemonicParsing="false" onAction="#clickAddCategory" text="Confirm" textAlignment="CENTER" textFill="#25a621" />
       <ButtonBar layoutY="6.0" prefHeight="40.0" prefWidth="200.0" />
-      <Button fx:id="cancel" layoutX="315.0" layoutY="222.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" textFill="#ea4d4d" />
+      <Button fx:id="cancel" layoutX="315.0" layoutY="220.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" textAlignment="CENTER" textFill="#ea4d4d" />
    </children>
 </AnchorPane>
