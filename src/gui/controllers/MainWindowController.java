@@ -171,12 +171,11 @@ public class MainWindowController {
             root = loader.load();
             AddMovieWindowController addMovieController = loader.getController();
             addMovieController.setMainWindowController(this);
-            userWantsEdit = false;
             Stage stage = new Stage();
             stage.setTitle("Add Movie");
             stage.setScene(new Scene(root));
             stage.show();
-            addMovieController.changeAddMovieBtn();
+            addMovieController.addMovieBtn.setText("Add Movie");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -430,13 +429,12 @@ public class MainWindowController {
                 addMovieController.fileField.setText(selectedMovie.getFilePath().get());
 
                 // Create a new stage for the AddMovieWindow
-                userWantsEdit = true;
                 Stage stage = new Stage();
                 stage.setTitle("Rate/Edit Movie");
                 stage.setScene(new Scene(root));
                 addMovieController.setStage(stage);
                 stage.show();
-                addMovieController.changeAddMovieBtn();
+                addMovieController.addMovieBtn.setText("Rate/Edit Movie");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -504,9 +502,7 @@ public class MainWindowController {
         }
     }
 
-    public boolean checkUserEditing(){
-        return userWantsEdit;
-    }
+
 
 
 }

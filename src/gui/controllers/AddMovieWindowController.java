@@ -82,12 +82,4 @@ public class AddMovieWindowController {
         this.stage = stage;
     }
 
-    public void changeAddMovieBtn(){
-        if (mainWindowController.checkUserEditing()){
-            addMovieBtn.setText("Rate/Edit Movie");
-        }
-        else {
-            addMovieBtn.setText("Add Movie");
-        }
-    }
 }
