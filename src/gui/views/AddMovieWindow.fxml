@@ -9,12 +9,13 @@
    <children>
       <TextField fx:id="fileField" layoutX="207.0" layoutY="258.0" />
       <TextField fx:id="titleField" layoutX="207.0" layoutY="83.0" />
-      <TextField fx:id="personalRatingField" layoutX="207.0" layoutY="200.0" />
+      <TextField fx:id="personalRatingField" layoutX="207.0" layoutY="200.0" prefHeight="31.0" prefWidth="68.0" />
       <Label layoutX="159.0" layoutY="88.0" text="Title" />
       <Label layoutX="84.0" layoutY="205.0" text="Personal Rating" />
       <Button fx:id="browseFileBtn" layoutX="125.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickBrowse" text="Browse" />
       <Button fx:id="addMovieBtn" layoutX="254.0" layoutY="324.0" mnemonicParsing="false" onAction="#clickAddMovie" text="Add Movie" />
-      <TextField fx:id="imdbRatingField" layoutX="207.0" layoutY="142.0" />
+      <TextField fx:id="imdbRatingField" layoutX="207.0" layoutY="142.0" prefHeight="31.0" prefWidth="68.0" />
       <Label layoutX="109.0" layoutY="147.0" text="IMDB Rating" />
+      <Button fx:id="imdbBtn" layoutX="296.0" layoutY="142.0" mnemonicParsing="false" onAction="#clickImdbBtn" text="Go to IMDB" />
    </children>
 </AnchorPane>

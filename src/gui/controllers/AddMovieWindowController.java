@@ -7,12 +7,18 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import static java.awt.SystemColor.desktop;
 
 public class AddMovieWindowController {
 
     public TextField fileField, titleField, personalRatingField, imdbRatingField;
-    public Button browseFileBtn, addMovieBtn;
+    public Button browseFileBtn, addMovieBtn, imdbBtn;
     private MainWindowController mainWindowController;
     private Stage stage;
     private boolean isRatingANumber=true;
@@ -82,4 +88,16 @@ public class AddMovieWindowController {
         this.stage = stage;
     }
 
+    public void clickImdbBtn(ActionEvent actionEvent) {
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        try {
+            //specify the protocol along with the URL
+            URI oURL = new URI(
+                    "https://www.imdb.com");
+            desktop.browse(oURL);
+        } catch (URISyntaxException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
