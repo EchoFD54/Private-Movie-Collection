@@ -91,12 +91,10 @@ public class AddMovieWindowController {
     public void clickImdbBtn(ActionEvent actionEvent) {
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
-            //specify the protocol along with the URL
             URI oURL = new URI(
                     "https://www.imdb.com");
             desktop.browse(oURL);
         } catch (URISyntaxException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
