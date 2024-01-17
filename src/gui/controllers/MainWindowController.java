@@ -339,8 +339,10 @@ public class MainWindowController {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
 
         for (Movie movie : movieManager.getAllMovies()) {
-            // Check if the title contains the filter query and IMDB rating is greater than or equal to the minimum
-            if (movie.getTitle().get().toLowerCase().contains(filterQuery) && compareImdbRating(movie.getImdbRating().get(), minImdbRatingStr) >= 0) {
+            // Check if the title or category contain the filter query and check if IMDB rating is greater than or equal to the minimum
+            if ((movie.getTitle().get().toLowerCase().contains(filterQuery)||
+                    categoriesInMovies(movie.getMovieId().get()).toString().toLowerCase().contains(filterQuery)) &&
+                    compareImdbRating(movie.getImdbRating().get(), minImdbRatingStr) >= 0) {
                 filteredMovies.add(movie);
             }
         }
