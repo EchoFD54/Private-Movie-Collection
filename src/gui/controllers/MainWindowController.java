@@ -43,6 +43,7 @@ public class MainWindowController {
     public TableView<Movie> movieTableView, movieInCatTableView;
     private Category selectedCategory;
     private Movie selectedMovie;
+    private boolean userWantsEdit = false;
 
 
     @FXML
@@ -170,10 +171,12 @@ public class MainWindowController {
             root = loader.load();
             AddMovieWindowController addMovieController = loader.getController();
             addMovieController.setMainWindowController(this);
+            userWantsEdit = false;
             Stage stage = new Stage();
-            stage.setTitle("Add/Rate Movie");
+            stage.setTitle("Add Movie");
             stage.setScene(new Scene(root));
             stage.show();
+            addMovieController.changeAddMovieBtn();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -425,13 +428,13 @@ public class MainWindowController {
                 addMovieController.fileField.setText(selectedMovie.getFilePath().get());
 
                 // Create a new stage for the AddMovieWindow
+                userWantsEdit = true;
                 Stage stage = new Stage();
-                stage.setTitle("Edit Movie");
+                stage.setTitle("Rate/Edit Movie");
                 stage.setScene(new Scene(root));
-
                 addMovieController.setStage(stage);
-
                 stage.show();
+                addMovieController.changeAddMovieBtn();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -497,6 +500,10 @@ public class MainWindowController {
             refreshCategoryTableView();
             refreshMoviesTableView();
         }
+    }
+
+    public boolean checkUserEditing(){
+        return userWantsEdit;
     }
 
 
