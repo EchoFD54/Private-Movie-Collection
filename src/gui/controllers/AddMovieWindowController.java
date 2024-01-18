@@ -92,7 +92,7 @@ public class AddMovieWindowController {
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
             URI oURL = new URI(
-                    "https://www.imdb.com");
+                    "https://www.imdb.com/find/?q="+titleField.getText());
             desktop.browse(oURL);
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
