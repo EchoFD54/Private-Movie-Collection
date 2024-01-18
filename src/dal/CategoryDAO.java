@@ -32,7 +32,6 @@ public class CategoryDAO implements ICategoryDAO{
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, newCategoryName);
             pstmt.setString(2, categoryName);
-            //pstmt.setInt(3, m.getMovieId().get());
             pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -78,11 +77,8 @@ public class CategoryDAO implements ICategoryDAO{
         }
     }
 
-    /**
-     * CHANGE "LIST<MOVIE>" TO VOID?
-     */
     @Override
-    public List<Movie> placeMovieOnCategory(int categoryId, int movieId) {
+    public void placeMovieOnCategory(int categoryId, int movieId) {
         try(Connection con = cm.getConnection())
         {
             String sql = "INSERT INTO CatMovie(CategoryId, MoviesId) VALUES (?,?)";
@@ -93,7 +89,6 @@ public class CategoryDAO implements ICategoryDAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
@@ -123,26 +118,6 @@ public class CategoryDAO implements ICategoryDAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public Category getCategoryById(int categoryId) {
-        try(Connection con = cm.getConnection())
-        {
-            String sql = "SELECT * FROM Category WHERE Id=?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, categoryId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                int id      = rs.getInt("Id");
-                String name = rs.getString("Name");
-
-                return new Category(id, name);
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return null;
     }
 
     public void removeMovieFromCategory(int movieId, int categoryId) {

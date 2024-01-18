@@ -41,11 +41,10 @@ public class CategoryManager {
     }
 
     /**
-     * @return a list of movies
      * Associates a movie to a category on the Database
      */
-    public List<Movie> placeMovieOnCategory(int categoryId, int movieId){
-        return categoryDAO.placeMovieOnCategory(categoryId, movieId);
+    public void placeMovieOnCategory(int categoryId, int movieId){
+        categoryDAO.placeMovieOnCategory(categoryId, movieId);
     }
 
     /**

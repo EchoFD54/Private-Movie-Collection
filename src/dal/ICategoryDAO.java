@@ -32,17 +32,12 @@ public interface ICategoryDAO {
     /**
      * Associates and saves a movie with a category in the database
      */
-    List<Movie> placeMovieOnCategory(int categoryId, int movieId);
+    void placeMovieOnCategory(int categoryId, int movieId);
 
     /**
      * @return a list of movies from a specific category saved on the database
      */
     List<Movie> getAllMoviesOfCategory(int categoryId);
-
-    /**
-     * @return a specific category saved on the database
-     */
-    Category getCategoryById(int categoryId);
 
     void removeMovieFromCategory(int movieId, int categoryId);
 

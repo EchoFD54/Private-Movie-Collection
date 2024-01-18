@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static java.awt.SystemColor.desktop;
-
 public class AddMovieWindowController {
 
     public TextField fileField, titleField, personalRatingField, imdbRatingField;

@@ -1,18 +1,13 @@
 package gui.controllers;
 
-import be.Category;
-import bll.CategoryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 public class RemoveCategoryController {
     @FXML
-    public Button btnConfirmDelete;
-    @FXML
-    public Button btnCancel;
+    public Button btnConfirmDelete, btnCancel;
     private MainWindowController mainWindowController;
 
     public void setMainWindowController(MainWindowController controller){

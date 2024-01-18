@@ -39,8 +39,6 @@ public class Movie {
         this.filePath = new SimpleStringProperty(filePath);
     }
 
-
-
     public StringProperty getTitle() {
         return title;
     }
@@ -75,14 +73,6 @@ public class Movie {
 
     public void setPersonalRating(String personalRating) {
         this.personalRating.set(personalRating);
-    }
-
-    public void setLastWatched(String lastWatched) {
-        this.lastWatched.set(lastWatched);
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath.set(filePath);
     }
 
     public void setMovieId(int movieId) {

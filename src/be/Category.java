@@ -9,7 +9,6 @@ public class Category {
 
     private StringProperty name;
     private IntegerProperty id;
-    private StringProperty movies;
 
     public Category(int id, String name) {
         this.id = new SimpleIntegerProperty(id);
@@ -28,16 +27,8 @@ public class Category {
         return this.id;
     }
 
-    public StringProperty getMovies() {
-        return movies;
-    }
-
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public void setMovies(String movies) {
-        this.movies.set(movies);
     }
 
     @Override

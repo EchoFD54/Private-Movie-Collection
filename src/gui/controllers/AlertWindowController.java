@@ -14,7 +14,6 @@ import java.util.List;
 public class AlertWindowController {
 
     public TableView<Movie> movieTableView;
-
     @FXML
     private Button btn;
 
@@ -39,10 +38,6 @@ public class AlertWindowController {
     }
 
     public void okBtn(ActionEvent actionEvent) {
-        closeWindow();
-    }
-
-    private void closeWindow(){
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
     }

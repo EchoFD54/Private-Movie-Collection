@@ -114,7 +114,7 @@ public class MovieDAO implements IMovieDAO{
             ps.setInt(1, movieId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String name           = rs.getString("Name");
+                String name = rs.getString("Name");
 
                 Category c = new Category(name);
                 categoriesInMovie.add(c);

@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,13 +27,13 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+
 public class MainWindowController {
     @FXML
     public TextField filterTextField, minImdbRatingTextField;
     @FXML
-    private Button newMovieBtn, deleteBtn, filterBtn, editMovieBtn, playBtn;
+    private Button newMovieBtn, filterBtn;
     private int movieIndex;
-    private int categoryIndex;
     @FXML
     public MovieManager movieManager = new MovieManager();
     @FXML
@@ -42,9 +41,7 @@ public class MainWindowController {
     private Boolean isFilterActive = false;
     public TableView<Category> categoryTableView;
     public TableView<Movie> movieTableView, movieInCatTableView;
-    private Category selectedCategory;
     private Movie selectedMovie;
-    private boolean userWantsEdit = false;
 
 
     @FXML
@@ -140,7 +137,6 @@ public class MainWindowController {
         // Set listener for selecting a category.
         categoryTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
-            this.selectedCategory = selectedCategory;
         });
     }
 
@@ -232,6 +228,7 @@ public class MainWindowController {
         if (selectedMovie != null) {
             playSelectedMovie(selectedMovie);
             movieManager.updateLastViewDate(selectedMovie, todayDate());
+            movieInCatTableView.getItems().clear();;
             refreshMoviesTableView();
         } else {
             // Show an alert or message indicating that no Movie is selected
@@ -317,13 +314,15 @@ public class MainWindowController {
         }
     }
 
-    public void editCategory(String selectedCategoryName, Category newCategoryName) {
-        newCategoryName.setName(selectedCategoryName);
+    public void editCategory(String newCategoryName, Category selectedCategoryName) {
+        categoryManager.updateCategory(newCategoryName, selectedCategoryName.getName().get());
+        selectedCategoryName.setName(newCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
         int index = categories.indexOf(selectedCategoryName);
         if (index != -1) {
-            categories.set(index, newCategoryName);  // Update the name of the category
+            categories.set(index, selectedCategoryName);  // Update the name of the category
             categoryTableView.setItems(categories);  // Update the category table view
+            refreshMoviesTableView();
         }
     }
 
@@ -465,6 +464,12 @@ public class MainWindowController {
         }
     }
 
+    public void createCategory(Category category) {
+        categoryManager.createCategory(category);
+        refreshCategoryTableView();
+        movieInCatTableView.getItems().clear();
+    }
+
     public void deleteCategory() {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
@@ -519,9 +524,6 @@ public class MainWindowController {
             refreshMoviesTableView();
         }
     }
-
-
-
 
 }
 
