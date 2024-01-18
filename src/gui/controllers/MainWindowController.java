@@ -24,6 +24,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class MainWindowController {
         dataBaseSetUp();
         setUpCategoryTableView();
         setUpMoviesInCategoryTableView();
+        showAlert(oldAndUnder6RatingMovies());
     }
 
     private void setMovieTableView() {
@@ -259,6 +261,7 @@ public class MainWindowController {
                     movieManager.deleteMovie(selectedMovie.getMovieId().get());
                     movieTableView.getItems().remove(selectedIndex);
                     refreshCategoryTableView();
+                    movieInCatTableView.getItems().clear();
                 }
             });
         } else {
@@ -269,7 +272,6 @@ public class MainWindowController {
             alert.setContentText("Please select a movie to delete.");
             alert.showAndWait();
         }
-
     }
 
     public void refreshCategoryTableView() {
@@ -290,18 +292,31 @@ public class MainWindowController {
         return dateFormat.format(currentDate);
     }
 
-    /**
-     * Code not needed?
-     * Or we can just refresh cat table view and use the category manager here (only)
-     * Nelson
-     */
-    /*
-    protected void createCategory(Category categoryName) {
-        ObservableList<Category> categories = categoryTableView.getItems();
-        categories.add(categoryName);  // Add the new category name to the list
-        categoryTableView.setItems(categories);  // Update the category view
+    public List<Movie> oldAndUnder6RatingMovies() {
+        LocalDate today = LocalDate.now();
+        LocalDate moreThan2Years = today.minusYears(2);
+        return movieManager.getAllOldMovies(String.valueOf(moreThan2Years));
     }
-     */
+
+    public void showAlert(List<Movie> movies) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/views/AlertWindow.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            AlertWindowController alertWindowController = loader.getController();
+            alertWindowController.initialize(movies);
+            alertWindowController.setMainWindowController(this);
+
+
+            Stage stage = new Stage();
+            stage.setTitle("REMINDER");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void editCategory(String selectedCategoryName, Category newCategoryName) {
         newCategoryName.setName(selectedCategoryName);
         ObservableList<Category> categories = categoryTableView.getItems();
@@ -321,6 +336,7 @@ public class MainWindowController {
         }
         refreshCategoryTableView();
         refreshMoviesTableView();
+        movieInCatTableView.getItems().clear();
     }
 
     public void toggleFilterBtn(ActionEvent actionEvent) {
@@ -349,6 +365,7 @@ public class MainWindowController {
         movieTableView.setItems(filteredMovies);
         filterBtn.setText("Clear");
         isFilterActive = true;
+        movieInCatTableView.getItems().clear();
     }
 
 
@@ -451,6 +468,7 @@ public class MainWindowController {
     public void deleteCategory() {
         categoryManager.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem().getId().get());
         refreshCategoryTableView();
+        movieInCatTableView.getItems().clear();
     }
 
     @FXML

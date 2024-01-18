@@ -33,4 +33,6 @@ public interface IMovieDAO {
      * @return a list of all Movies saved on the Database
      */
     List<Category> getAllCategoriesOfMovie(int movieId);
+
+    public List<Movie> getAllOldMovies(String date);
 }

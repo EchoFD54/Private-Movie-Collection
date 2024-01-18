@@ -20,7 +20,6 @@ public class MovieDAO implements IMovieDAO{
             pstmt.setString(2, m.getImdbRating().get());
             pstmt.setString(3, m.getPersonalRating().get());
             pstmt.setString(4, m.getFilePath().get());
-            //pstmt.setString(5, m.getLastWatched().get());
             pstmt.execute();
 
             try (ResultSet keys = pstmt.getGeneratedKeys()) {
@@ -115,13 +114,37 @@ public class MovieDAO implements IMovieDAO{
             ps.setInt(1, movieId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                //int id                = rs.getInt("Id");
                 String name           = rs.getString("Name");
 
                 Category c = new Category(name);
                 categoriesInMovie.add(c);
             }
             return categoriesInMovie;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Movie> getAllOldMovies(String date) {
+        List<Movie> movies = new ArrayList<>();
+
+        try(Connection con = cm.getConnection())
+        {
+            String sql = "SELECT * FROM Movies WHERE PersonalRating < 6 AND LastView BETWEEN '0001-01-01' AND ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int id                = rs.getInt("Id");
+                String name           = rs.getString("Name");
+                String imdbRating     = rs.getString("IMDBRating");
+                String personalRating = rs.getString("PersonalRating");
+                String lastView       = rs.getString("LastView");
+
+                Movie movie = new Movie(id, name, imdbRating, personalRating, lastView);
+                movies.add(movie);
+            }
+            return movies;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

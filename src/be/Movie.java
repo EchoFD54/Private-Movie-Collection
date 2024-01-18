@@ -24,12 +24,22 @@ public class Movie {
         this.lastWatched = new SimpleStringProperty(lastWatched);
     }
 
+    public Movie(int movieId, String title, String imdbRating, String personalRating, String lastWatched){
+        this.movieId = new SimpleIntegerProperty(movieId);
+        this.title =new SimpleStringProperty(title);
+        this.imdbRating = new SimpleStringProperty(imdbRating);
+        this.personalRating = new SimpleStringProperty(personalRating);
+        this.lastWatched = new SimpleStringProperty(lastWatched);
+    }
+
     public Movie(String title, String imdbRating, String personalRating, String filePath){
         this.title =new SimpleStringProperty(title);
         this.imdbRating = new SimpleStringProperty(imdbRating);
         this.personalRating = new SimpleStringProperty(personalRating);
         this.filePath = new SimpleStringProperty(filePath);
     }
+
+
 
     public StringProperty getTitle() {
         return title;

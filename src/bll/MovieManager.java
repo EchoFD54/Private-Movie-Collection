@@ -47,6 +47,10 @@ public class MovieManager {
     public List<Category> getAllCategoriesOfMovie(int movieId) {
         return movieDAO.getAllCategoriesOfMovie(movieId);
     }
+
+    public List<Movie> getAllOldMovies(String date){
+        return movieDAO.getAllOldMovies(date);
+    }
 }
 
 
