@@ -181,7 +181,7 @@
                         <Insets left="10.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="openRemoveMovieFromCategoryBtn" mnemonicParsing="false" onAction="#openRemoveMovieFromCategoryButton" text="Remove Movie from Category">
+                  <Button fx:id="openRemoveMovieFromCategoryBtn" mnemonicParsing="false" onAction="#openRemoveMovieFromCategoryWindow" text="Remove Movie from Category">
                      <HBox.margin>
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
