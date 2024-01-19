@@ -286,7 +286,7 @@ public class MainWindowController {
             Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
             // Removes a movie from a category on the database
             categoryManager.removeMovieFromCategory(selectedMovie.getMovieId().get(), selectedCategory.getId().get());
-            movieInCatTableView.getItems().remove(selectedMovie);
+            movieInCatTableView.getItems().clear();
             refreshCategoryTableView();
             refreshMoviesTableView();
         }

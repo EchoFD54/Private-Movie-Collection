@@ -139,12 +139,12 @@
                   </HBox>
                   <HBox prefHeight="211.0" prefWidth="580.0">
                      <children>
-                        <TableView fx:id="movieInCatTableView" prefHeight="200.0" prefWidth="597.0">
+                        <TableView fx:id="movieInCatTableView" prefHeight="200.0" prefWidth="595.0">
                           <columns>
                             <TableColumn prefWidth="150.0" text="Name" />
                             <TableColumn prefWidth="150.0" text="IMDB Rating" />
                               <TableColumn prefWidth="150.0" text="Personal Rating" />
-                              <TableColumn prefWidth="150.0" text="Last Viewed" />
+                              <TableColumn prefWidth="143.0" text="Last Viewed" />
                           </columns>
                         </TableView>
                      </children>
