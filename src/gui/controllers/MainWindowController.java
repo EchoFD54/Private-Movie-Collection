@@ -208,7 +208,11 @@ public class MainWindowController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Cannot play the selected movie. File does not exist or Desktop is not supported.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Play error");
+            alert.setHeaderText(null);
+            alert.setContentText("Movie file does not exist or is not supported");
+            alert.showAndWait();
         }
     }
 
