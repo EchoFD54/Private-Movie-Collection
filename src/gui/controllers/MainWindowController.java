@@ -24,8 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MainWindowController {
@@ -73,11 +74,14 @@ public class MainWindowController {
         personalRatingColumn.setCellValueFactory(cellData -> cellData.getValue().getPersonalRating());
         categories.setCellValueFactory(cellData -> {
             int movieId = cellData.getValue().getMovieId().get();
-            //categoriesInMovies(movieId).sort((o1, o2) -> o1.getName().get().compareTo(o2.getName().get()));
-            //categoriesInMovies(movieId).sort(Comparator.comparing(o -> o.getName().get()));
-            String totalCategories = categoriesInMovies(movieId).toString();
-            return new SimpleStringProperty(totalCategories);
+            List<Category> sortedCategories = new ArrayList<>(categoriesInMovies(movieId));
+            sortedCategories.sort(Comparator.comparing(o -> o.getName().get()));
 
+            String totalCategories = sortedCategories.stream()
+                    .map(category -> category.getName().get())
+                    .collect(Collectors.joining(", "));
+
+            return new SimpleStringProperty(totalCategories);
         });
         lastWatchedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastWatched());
     }
@@ -318,9 +322,9 @@ public class MainWindowController {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
 
         for (Movie movie : movieManager.getAllMovies()) {
-            // Check if the title or category contain the filter query and check if IMDB rating is greater than or equal to the minimum
-            if ((movie.getTitle().get().toLowerCase().contains(filterQuery)||
-                    categoriesInMovies(movie.getMovieId().get()).toString().toLowerCase().contains(filterQuery)) &&
+            // Check if the title or categories contain the filter query
+            if ((movie.getTitle().get().toLowerCase().contains(filterQuery) ||
+                    containsCategories(movie, filterQuery)) &&
                     compareImdbRating(movie.getImdbRating().get(), minImdbRatingStr) >= 0) {
                 filteredMovies.add(movie);
             }
@@ -330,6 +334,20 @@ public class MainWindowController {
         filterBtn.setText("Clear");
         isFilterActive = true;
         movieInCatTableView.getItems().clear();
+    }
+
+    private boolean containsCategories(Movie movie, String filterQuery) {
+        List<Category> movieCategories = categoriesInMovies(movie.getMovieId().get());
+        Set<String> categoryNames = new HashSet<>();
+
+        // Convert Category objects to strings
+        for (Category category : movieCategories) {
+            categoryNames.add(category.getName().get().toLowerCase());
+        }
+
+        Set<String> searchCategories = new HashSet<>(Arrays.asList(filterQuery.split(", ")));
+
+        return categoryNames.containsAll(searchCategories);
     }
 
 
