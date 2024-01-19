@@ -30,17 +30,22 @@ import java.util.List;
 
 public class MainWindowController {
     @FXML
-    public TextField filterTextField, minImdbRatingTextField;
+    private TextField filterTextField, minImdbRatingTextField;
     @FXML
     private Button newMovieBtn, filterBtn;
+    @FXML
     private int movieIndex;
     @FXML
-    public MovieManager movieManager = new MovieManager();
+    private MovieManager movieManager = new MovieManager();
     @FXML
-    public CategoryManager categoryManager = new CategoryManager();
+    private CategoryManager categoryManager = new CategoryManager();
+    @FXML
     private Boolean isFilterActive = false;
-    public TableView<Category> categoryTableView;
-    public TableView<Movie> movieTableView, movieInCatTableView;
+    @FXML
+    private TableView<Category> categoryTableView;
+    @FXML
+    private TableView<Movie> movieTableView, movieInCatTableView;
+    @FXML
     private Movie selectedMovie;
 
 
@@ -105,12 +110,6 @@ public class MainWindowController {
         });
     }
 
-    private int numberMoviesInCategory(int categoryId) {
-        if (categoryId > 0) {
-            return categoryManager.getAllMoviesOfCategory(categoryId).size();
-        } else return -1;
-    }
-
     public void setButtons() {
         // Set a listener for handling movie selection
         movieTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -133,11 +132,6 @@ public class MainWindowController {
 
         //  listener for the minimum IMDB rating TextField
         minImdbRatingTextField.textProperty().addListener((observable, oldValue, newValue) -> applyFilter());
-
-        // Set listener for selecting a category.
-        categoryTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Category selectedCategory = categoryTableView.getSelectionModel().getSelectedItem();
-        });
     }
 
     private void dataBaseSetUp() {
@@ -149,6 +143,12 @@ public class MainWindowController {
         for (Category c : categoryManager.getAllCategories()) {
             categoryTableView.getItems().add(c);
         }
+    }
+
+    private int numberMoviesInCategory(int categoryId) {
+        if (categoryId > 0) {
+            return categoryManager.getAllMoviesOfCategory(categoryId).size();
+        } else return -1;
     }
 
     public void moviesInCategory(MouseEvent mouseEvent) {

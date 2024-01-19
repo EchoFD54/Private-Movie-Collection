@@ -1,15 +1,14 @@
 package gui.controllers;
 
 import be.Category;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class EditCategoryController {
-    @FXML
-    private TextField editCategoryName;
-    private MainWindowController mainWindowController;
-    private Category selectedCategory;
+
+    public TextField editCategoryName;
+    public MainWindowController mainWindowController;
+    public Category selectedCategory;
 
 
     public void setMainWindowController(MainWindowController controller){
@@ -32,7 +31,7 @@ public class EditCategoryController {
         }
     }
 
-    private void closeEditedWindow(){
+    public void closeEditedWindow(){
         Stage stage = (Stage) editCategoryName.getScene().getWindow();
         stage.close();
     }

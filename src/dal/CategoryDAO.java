@@ -2,10 +2,10 @@ package dal;
 
 import be.Category;
 import be.Movie;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class CategoryDAO implements ICategoryDAO{
 
@@ -78,20 +78,6 @@ public class CategoryDAO implements ICategoryDAO{
     }
 
     @Override
-    public void placeMovieOnCategory(int categoryId, int movieId) {
-        try(Connection con = cm.getConnection())
-        {
-            String sql = "INSERT INTO CatMovie(CategoryId, MoviesId) VALUES (?,?)";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, categoryId);
-            pstmt.setInt(2, movieId);
-            pstmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public List<Movie> getAllMoviesOfCategory(int categoryId) {
         List<Movie> moviesInCategory = new ArrayList<>();
         try(Connection con = cm.getConnection())
@@ -115,6 +101,20 @@ public class CategoryDAO implements ICategoryDAO{
                 moviesInCategory.add(m);
             }
             return moviesInCategory;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void placeMovieOnCategory(int categoryId, int movieId) {
+        try(Connection con = cm.getConnection())
+        {
+            String sql = "INSERT INTO CatMovie(CategoryId, MoviesId) VALUES (?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, categoryId);
+            pstmt.setInt(2, movieId);
+            pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -2,10 +2,10 @@ package dal;
 
 import be.Category;
 import be.Movie;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MovieDAO implements IMovieDAO{
     private final ConnectionManager cm = new ConnectionManager();

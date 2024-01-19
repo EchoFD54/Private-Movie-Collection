@@ -1,20 +1,18 @@
 package gui.controllers;
 
 import be.Category;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class NewCategoryController {
-    @FXML
-    private TextField nameField;
-    private MainWindowController mainWindowController;
+
+    public TextField nameField;
+    public MainWindowController mainWindowController;
 
     public void setMainWindowController(MainWindowController controller){
         this.mainWindowController = controller;
     }
 
-    @FXML
     public void clickAddCategory(){
         String categoryName = nameField.getText().trim();
         Category category = new Category(categoryName);
@@ -24,12 +22,11 @@ public class NewCategoryController {
         }
     }
 
-    @FXML
     public void cancelButton(){
         closeWindow();
     }
 
-    private void closeWindow(){
+    public void closeWindow(){
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
